@@ -1,0 +1,137 @@
+$body-bg: #fff;
+$nav-bg: #007bff;
+
+$z-index-navbar: 15;
+$z-index-megamenu-content: $z-index-navbar - 1;
+$z-index-megamenu-bg: $z-index-megamenu-content - 1;
+$z-index-megamenu-dim: $z-index-megamenu-bg - 1;
+
+$navbar-height: 54px;
+
+body {
+    background: $body-bg;
+}
+
+section {
+    padding: 100px 0;
+}
+
+.hero {
+    color: #fff;
+    background-image: url(//placeimg.com/1500/600/any);
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    
+    &:before {
+        content: "";
+        background: rgba(0,0,0,0.6);
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+    }
+    
+    .container {
+        position: relative;
+        z-index: 2;
+    }
+}
+
+.megamenu {
+    background: $nav-bg;
+    z-index: $z-index-navbar;
+
+    .megamenu-nav {
+        padding: 0;
+        margin: 0;
+
+        .nav-item {
+            display: block;
+
+            &.is-open {
+                > .megamenu-content {
+                    visibility: visible;
+                    opacity: 1;
+                }
+                
+                > .nav-link {
+                    background: #fff;
+                    color: #333;
+                }
+            }
+        }
+
+        .nav-link {
+            color: #fff;
+            padding: 15px 30px;
+
+            &:hover {
+                background: #fff;
+                color: #333;
+            }
+        }
+    }
+
+    .megamenu-content {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: $navbar-height;
+        overflow: hidden;
+        visibility: hidden;
+        opacity: 0;
+        z-index: $z-index-megamenu-content;
+        transition: all .3s ease-in-out;
+
+        .container {
+            padding: 45px 15px;
+        }
+
+        .subnav {
+            margin: 0;
+            padding: 0;
+        }
+
+        .subnav-item {
+            display: block;
+
+            .subnav-link {
+                padding: 10px 0;
+                display: block;
+            }
+        }
+    }
+}
+
+.megamenu-background {
+    background: #fff;
+    position: absolute;
+    left: 0;
+    top: $navbar-height;
+    right: 0;
+    height: 0;
+    transition: all .3s ease-in-out;
+    box-shadow: 0px 10px 20px rgba(0,0,0,0.15);
+    z-index: $z-index-megamenu-bg;
+}
+
+.megamenu-dim {
+    background: rgba(0,0,0,0.6);
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: $navbar-height;
+    visibility: hidden;
+    opacity: 0;
+    z-index: -$z-index-megamenu-dim;
+    transition: all .3s ease-in-out;
+
+    body.megamenu-visible & {
+        z-index: $z-index-megamenu-dim;
+        visibility: visible;
+        opacity: 1;
+    }
+}
