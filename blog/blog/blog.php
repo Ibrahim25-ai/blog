@@ -3,10 +3,10 @@ include 'partials/header.php';
 
 
 $perPage = 5;
-        $sqlQuery = "SELECT * FROM products";
-        $result = mysqli_query($connection, $sqlQuery);
-        $totalRecords = mysqli_num_rows($result);
-        $totalPages = ceil($totalRecords/$perPage);
+$sqlQuery = "SELECT * FROM products";
+$result = mysqli_query($connection, $sqlQuery);
+$totalRecords = mysqli_num_rows($result);
+$totalPages = ceil($totalRecords / $perPage);
 
 // fetch all posts from <posts table
 $query = "SELECT * FROM products ORDER BY date_time DESC";
@@ -22,7 +22,7 @@ $products4 = mysqli_query($connection, $query);
 $query = "SELECT * FROM products WHERE pack_id=6";
 $products5 = mysqli_query($connection, $query);
 
-?> 
+?>
 
 <section class="search__bar">
   <form class="container search__bar-container" action="<?= ROOT_URL ?>search.php" method="GET">
@@ -42,13 +42,13 @@ $products5 = mysqli_query($connection, $query);
       <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
     </div>
     <div class="carousel-inner">
-      <div class="carousel-item active" style="max-height :70vh;">
+      <div class="carousel-item active" style="max-height :64vh;">
         <img src="./images/1.jpg" class="d-block w-100" alt="...">
       </div>
-      <div class="carousel-item" style="max-height :70vh;">
+      <div class="carousel-item" style="max-height :64vh;">
         <img src="./images/2.jpg" class="d-block w-100" alt="...">
       </div>
-      <div class="carousel-item" style="max-height :70vh;">
+      <div class="carousel-item" style="max-height :64vh;">
         <img src="./images/3.jpg" class="d-block w-100" alt="...">
       </div>
     </div>
@@ -64,10 +64,10 @@ $products5 = mysqli_query($connection, $query);
 </section>
 <section id="tabs">
   <div class="container-fluid p-5" data-aos="fade-up">
-    <div class="section-header  text-center " style="margin-top: 2rem;">
+    <div class="section-header  text-center">
 
       <p class="fw-bold fs-4" style="color:hsl(51, 91%, 60%);">WELCOME TO MASS<span>&</span>MUSCLE</p>
-      <p class="fw-bolder fs-2 text-black" style="margin-top:2rem;">OUR PRODUCTS</p>
+      <p class="fw-bolder fs-2 text-black mt-5">OUR PRODUCTS</p>
     </div>
 
     <ul class="nav nav-tabs d-flex justify-content-center text-black mt-5" data-aos="fade-up" daqqwqwqqwta-aos-delay="200">
@@ -76,7 +76,7 @@ $products5 = mysqli_query($connection, $query);
         <button class="nav-link active show" id="pills-home-ab" data-bs-toggle="pill" data-bs-target="#NEWP" type="button" role="tab" aria-controls="pills-home" aria-selected="true">NEW PRODUCTS</button>
       </li><!-- End tab nav item -->
       <li class="nav-item">
-        <button class="nav-link " id="pills-home-tb" data-bs-toggle="pill" type="button" data-bs-target="#TOPROM" role="tab" aria-controls="pills-home" aria-selected="true" >TOP PROMOTIONS</button>
+        <button class="nav-link " id="pills-home-tb" data-bs-toggle="pill" type="button" data-bs-target="#TOPROM" role="tab" aria-controls="pills-home" aria-selected="true">TOP PROMOTIONS</button>
       </li>
       <li class="nav-item">
         <button class="nav-link " id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#TEST" type="button" role="tab" aria-controls="pills-home" aria-selected="true">BEST SALES</button>
@@ -87,26 +87,22 @@ $products5 = mysqli_query($connection, $query);
     </ul>
 
     <div class="tab-content" data-aos="fade-up" data-aos-delay="300">
-
       <div class="tab-pane fade active show" id="NEWP">
         <div class="container1 text-center mt-5 mb-5">
-        <nav>
-  <ul class="pagination">
-    <?php for ($i = 1; $i <= $totalPages; $i++) : ?>
-      <li class="page-item <?php if ($i == 1) echo 'active'; ?>">
-        <a href="#" class="page-link pagination-link" data-page-number="<?= $i ?>"><?= $i ?></a>
-      </li>
-    <?php endfor ?>
-  </ul>
-</nav>  
+          <nav>
+            <ul class="pagination">
+              <?php for ($i = 1; $i <= $totalPages; $i++) : ?>
+                <li class="page-item <?php if ($i == 1) echo 'active'; ?>">
+                  <a href="#" class="page-link pagination-link" data-page-number="<?= $i ?>"><?= $i ?></a>
+                </li>
+              <?php endfor ?>
+            </ul>
+          </nav>
           <div id="product-list" class="row wrapper rounded fade show active">
-            
           </div>
         </div>
-        
       </div>
     </div>
-
     <div class="tab-content" data-aos="fade-up" data-aos-delay="300">
       <div class="tab-pane fade  " id="TOPROM">
         <div class="container1 text-center mt-5 mb-5 ">
@@ -122,32 +118,37 @@ $products5 = mysqli_query($connection, $query);
                   <div class="col menu-item">
                     <div class="card border-0 text-center">
                       <div class="card-body ">
-                        <?php if ($product['new']) : ?>
-                          <div class="notify-badge rounded-circle d-flex align-items-center justify-content-center vh-100 top-0 end-0" style="margin-top:4rem;">
-                            <span class="badge badge-secondary " style="font-size: 0.9rem;">New</span>
+                      <?php if ($product['new'] && $product['promo'] == 0) : ?>
+                          <div class=" notify-badge rounded-circle d-flex align-items-center justify-content-center vh-100 top-0 end-0">
+                            <span class="badge  badge-secondary " style="font-size: 0.9rem;">New</span>
+                          </div>
+                        <?php endif ?>
+                        <?php if ($product['new'] && $product['promo'] != 0) : ?>
+                          <div class=" notify-badge rounded-circle d-flex align-items-center justify-content-center vh-100 top-0 end-0 " style="margin-top: 3.5rem;">
+                            <span class="badge  badge-secondary " style="font-size: 0.9rem;">New</span>
                           </div>
                         <?php endif ?>
                         <?php if ($product['promo'] != 0) : ?>
-                          <div class="notify-badge rounded-circle d-flex align-items-center justify-content-center vh-100 top-0 end-0">
+                          <div class="notify-badge  rounded-circle d-flex align-items-center justify-content-center vh-100 top-0 end-0 ">
                             <span class="badge badge-secondary " style="font-size: 0.9rem;">-<?= $product['promo'] ?>%</span>
                           </div>
                         <?php endif ?>
 
                         <div class="card-image">
 
-                          <img style="height : 17rem;" src="<?= ROOT_URL ?>images/<?= $product['thumbnail'] ?>" class="menu-img " width="0">
+                          <img src="<?= ROOT_URL ?>images/<?= $product['thumbnail'] ?>" class="menu-img prod_img" width="0">
 
                         </div>
 
                         <div class="card-inner prod__desc">
-                          <p style="height:1rem;margin-top:0.5rem;" class="fw-bolder  text-truncate "><?= $product['title'] ?></h4>
+                          <p class="fw-bolder  text-truncate prod_title"><?= $product['title'] ?></h4>
 
                           <div class="row align-items-center">
                             <div class="col-6   text-end ">
 
                               <p class="text-nowrap text-decoration-line-through fw-lighter"><?= $product['prix_org'] ?> DT</p>
                             </div>
-                            <div class="col-6  text-start" style="margin-right: -0.5rem;">
+                            <div class="col-6  text-start prod_prix_aft">
                               <p class=" text-nowrap fw-bolder " style="color:hsl(51, 91%, 60%);"><?= $product['prix_aft'] ?> DT</p>
                             </div>
                           </div>
@@ -167,7 +168,7 @@ $products5 = mysqli_query($connection, $query);
             <?php else : ?>
               <div class="alert__message error"><?= "No products found" ?></div>
             <?php endif ?>
-            
+
 
 
           </div>
@@ -191,13 +192,18 @@ $products5 = mysqli_query($connection, $query);
                   <div class="col menu-item">
                     <div class="card border-0 text-center">
                       <div class="card-body ">
-                        <?php if ($product['new']) : ?>
-                          <div class="notify-badge rounded-circle d-flex align-items-center justify-content-center vh-100 top-0 end-0" style="margin-top:4rem;">
-                            <span class="badge badge-secondary " style="font-size: 0.9rem;">New</span>
+                      <?php if ($product['new'] && $product['promo'] == 0) : ?>
+                          <div class=" notify-badge rounded-circle d-flex align-items-center justify-content-center vh-100 top-0 end-0">
+                            <span class="badge  badge-secondary " style="font-size: 0.9rem;">New</span>
+                          </div>
+                        <?php endif ?>
+                        <?php if ($product['new'] && $product['promo'] != 0) : ?>
+                          <div class=" notify-badge rounded-circle d-flex align-items-center justify-content-center vh-100 top-0 end-0 " style="margin-top: 3.5rem;">
+                            <span class="badge  badge-secondary " style="font-size: 0.9rem;">New</span>
                           </div>
                         <?php endif ?>
                         <?php if ($product['promo'] != 0) : ?>
-                          <div class="notify-badge rounded-circle d-flex align-items-center justify-content-center vh-100 top-0 end-0">
+                          <div class="notify-badge  rounded-circle d-flex align-items-center justify-content-center vh-100 top-0 end-0 ">
                             <span class="badge badge-secondary " style="font-size: 0.9rem;">-<?= $product['promo'] ?>%</span>
                           </div>
                         <?php endif ?>
@@ -283,12 +289,12 @@ $products5 = mysqli_query($connection, $query);
   </div>
 
 </section>
-  
-           
+
+
 <section>
   <div class="container-fluid  mt-5 ">
     <div class="row g-0 justify-content-center ">
-      <div class="col-lg-4    divimg"><img class="imgm rounded-start"  src="<?= ROOT_URL ?>images/ts01.jpg" ></div>
+      <div class="col-lg-4    divimg"><img class="imgm rounded-start" src="<?= ROOT_URL ?>images/ts01.jpg"></div>
       <div class="col-lg-4  divimg"><img class="imgm" src="<?= ROOT_URL ?>images/ts02.jpg"></div>
       <div class="col-lg-4   divimg"><img class="imgm rounded-end" src="<?= ROOT_URL ?>images/ts26.jpg"></div>
     </div>
@@ -297,7 +303,7 @@ $products5 = mysqli_query($connection, $query);
 
 <section id="tabs">
   <div class="container-fluid p-5" data-aos="fade-up">
-    
+
 
     <ul class="nav nav-tabs d-flex justify-content-center text-black mt-5" data-aos="fade-up" daqqwqwqqwta-aos-delay="200">
 
@@ -305,7 +311,7 @@ $products5 = mysqli_query($connection, $query);
         <button class="nav-link active show" id="pills-home-b" data-bs-toggle="pill" data-bs-target="#T1" type="button" role="tab" aria-controls="pills-home" aria-selected="true">PROTEIN</button>
       </li><!-- End tab nav item -->
       <li class="nav-item">
-        <button class="nav-link " id="pills-homeb" data-bs-toggle="pill" type="button" data-bs-target="#T2" role="tab" aria-controls="pills-home" aria-selected="true" >PRISE DE MASSE</button>
+        <button class="nav-link " id="pills-homeb" data-bs-toggle="pill" type="button" data-bs-target="#T2" role="tab" aria-controls="pills-home" aria-selected="true">PRISE DE MASSE</button>
       </li>
       <li class="nav-item">
         <button class="nav-link " id="pills-hoab" data-bs-toggle="pill" data-bs-target="#T3" type="button" role="tab" aria-controls="pills-home" aria-selected="true">PERTE DE POIDS</button>
@@ -331,21 +337,21 @@ $products5 = mysqli_query($connection, $query);
                   <div class="col menu-item">
                     <div class="card border-0 text-center">
                       <div class="card-body position-relative p-4">
-                      <?php if ($product['new'] && $product['promo'] == 0): ?>
-                      <div class=" notify-badge rounded-circle d-flex align-items-center justify-content-center vh-100 top-0 end-0" >
-                        <span class="badge  badge-secondary " style="font-size: 0.9rem;">New</span>
-                      </div>
-                    <?php endif ?>
-                    <?php if ($product['new'] && $product['promo'] != 0): ?>
-                      <div class=" notify-badge rounded-circle d-flex align-items-center justify-content-center vh-100 top-0 end-0 " style="margin-top: 3.5rem;">
-                        <span class="badge  badge-secondary " style="font-size: 0.9rem;">New</span>
-                      </div>
-                    <?php endif ?>
-                    <?php if ($product['promo'] != 0) : ?>
-                      <div class="notify-badge  rounded-circle d-flex align-items-center justify-content-center vh-100 top-0 end-0 ">
-                        <span class="badge badge-secondary " style="font-size: 0.9rem;">-<?= $product['promo'] ?>%</span>
-                      </div>
-                    <?php endif ?>
+                        <?php if ($product['new'] && $product['promo'] == 0) : ?>
+                          <div class=" notify-badge rounded-circle d-flex align-items-center justify-content-center vh-100 top-0 end-0">
+                            <span class="badge  badge-secondary " style="font-size: 0.9rem;">New</span>
+                          </div>
+                        <?php endif ?>
+                        <?php if ($product['new'] && $product['promo'] != 0) : ?>
+                          <div class=" notify-badge rounded-circle d-flex align-items-center justify-content-center vh-100 top-0 end-0 " style="margin-top: 3.5rem;">
+                            <span class="badge  badge-secondary " style="font-size: 0.9rem;">New</span>
+                          </div>
+                        <?php endif ?>
+                        <?php if ($product['promo'] != 0) : ?>
+                          <div class="notify-badge  rounded-circle d-flex align-items-center justify-content-center vh-100 top-0 end-0 ">
+                            <span class="badge badge-secondary " style="font-size: 0.9rem;">-<?= $product['promo'] ?>%</span>
+                          </div>
+                        <?php endif ?>
 
                         <div class="card-image">
 
@@ -401,21 +407,21 @@ $products5 = mysqli_query($connection, $query);
                   <div class="col menu-item">
                     <div class="card border-0 text-center">
                       <div class="card-body ">
-                      <?php if ($product['new'] && $product['promo'] == 0): ?>
-                      <div class=" notify-badge rounded-circle d-flex align-items-center justify-content-center vh-100 top-0 end-0" >
-                        <span class="badge  badge-secondary " style="font-size: 0.9rem;">New</span>
-                      </div>
-                    <?php endif ?>
-                    <?php if ($product['new'] && $product['promo'] != 0): ?>
-                      <div class=" notify-badge rounded-circle d-flex align-items-center justify-content-center vh-100 top-0 end-0 " style="margin-top: 3.5rem;">
-                        <span class="badge  badge-secondary " style="font-size: 0.9rem;">New</span>
-                      </div>
-                    <?php endif ?>
-                    <?php if ($product['promo'] != 0) : ?>
-                      <div class="notify-badge  rounded-circle d-flex align-items-center justify-content-center vh-100 top-0 end-0 ">
-                        <span class="badge badge-secondary " style="font-size: 0.9rem;">-<?= $product['promo'] ?>%</span>
-                      </div>
-                    <?php endif ?>
+                        <?php if ($product['new'] && $product['promo'] == 0) : ?>
+                          <div class=" notify-badge rounded-circle d-flex align-items-center justify-content-center vh-100 top-0 end-0">
+                            <span class="badge  badge-secondary " style="font-size: 0.9rem;">New</span>
+                          </div>
+                        <?php endif ?>
+                        <?php if ($product['new'] && $product['promo'] != 0) : ?>
+                          <div class=" notify-badge rounded-circle d-flex align-items-center justify-content-center vh-100 top-0 end-0 " style="margin-top: 3.5rem;">
+                            <span class="badge  badge-secondary " style="font-size: 0.9rem;">New</span>
+                          </div>
+                        <?php endif ?>
+                        <?php if ($product['promo'] != 0) : ?>
+                          <div class="notify-badge  rounded-circle d-flex align-items-center justify-content-center vh-100 top-0 end-0 ">
+                            <span class="badge badge-secondary " style="font-size: 0.9rem;">-<?= $product['promo'] ?>%</span>
+                          </div>
+                        <?php endif ?>
 
                         <div class="card-image">
 
@@ -605,12 +611,12 @@ $products5 = mysqli_query($connection, $query);
 
       <p class="fw-bolder fs-2 text-black">OUR SPONSORS</p>
     </div>
-    <div class="row  justify-content-center align-items-center text-center p-5">
-      <div class="col-lg-2 "><img src="<?= ROOT_URL ?>images/logo1.png" style="max-width: 260px;"></div>
-      <div class="col-lg-2 "><img src="<?= ROOT_URL ?>images/logo3.png" style="max-width: 260px;"></div>
-      <div class="col-lg-2"><img src="<?= ROOT_URL ?>images/logo2.png" style="max-width: 260px;"></div>
-      <div class="col-lg-2 "><img src="<?= ROOT_URL ?>images/logo1.png" style="max-width: 260px;"></div>
-      <div class="col-lg-2 "><img src="<?= ROOT_URL ?>images/logo3.png" style="max-width: 260px;"></div>
+    <div class="row spo_img justify-content-center align-items-center text-center p-5">
+      <div class="col-lg-2 col-md-4"><img src="<?= ROOT_URL ?>images/logo1.png"></div>
+      <div class="col-lg-2 col-md-4"><img src="<?= ROOT_URL ?>images/logo3.png"></div>
+      <div class="col-lg-2 col-md-4"><img src="<?= ROOT_URL ?>images/logo2.png"></div>
+      <div class="col-lg-2 col-md-4"><img src="<?= ROOT_URL ?>images/logo1.png"></div>
+      <div class="col-lg-2 col-md-4"><img src="<?= ROOT_URL ?>images/logo3.png"></div>
     </div>
   </div>
 </section>
@@ -620,19 +626,21 @@ $products5 = mysqli_query($connection, $query);
   $(document).ready(function() {
     var page = 1; // initial page
     load_data(page); // load initial data
-  
+
     function load_data(page) {
       $.ajax({
         url: 'load_data.php',
         method: 'POST',
-        data: {page: page},
+        data: {
+          page: page
+        },
         dataType: 'json',
         success: function(data) {
           $('#product-list').html(data.html); // update HTML of container element
         }
       });
     }
-  
+
     $(document).on('click', '.pagination-link', function(event) {
       event.preventDefault();
       page = $(this).data('page-number');
