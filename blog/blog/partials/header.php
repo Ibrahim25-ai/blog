@@ -2,6 +2,8 @@
 require 'config/database.php';
 $query = "SELECT * FROM packs";
 $packs = mysqli_query($connection, $query);
+$query = "SELECT * FROM products ORDER BY promo DESC Limit 0,4";
+$products2 = mysqli_query($connection, $query);
 // fetch current user from database
 if (isset($_SESSION['user-id'])) {
     $id = filter_var($_SESSION['user-id'], FILTER_SANITIZE_NUMBER_INT);
@@ -26,7 +28,7 @@ if (isset($_SESSION['user-id'])) {
     <!-- CUSTOM STYLESHEET -->
     <link rel="stylesheet" href="<?= ROOT_URL ?>css/style.css">
     <link rel="stylesheet" href="<?= ROOT_URL ?>css/style1.css">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- ICONSCOUT CDN -->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
@@ -39,10 +41,10 @@ if (isset($_SESSION['user-id'])) {
 <body>
 
     <nav class=" nav megamenu nav__container">
-        
+
         <div class=" container-fluid nav__container ">
 
-            <img class="logo__img" src="<?= ROOT_URL ?>images/mass.png" >
+            <img class="logo__img" src="<?= ROOT_URL ?>images/mass.png">
 
             <a href="blog.php" class="nav__logo fw-bold fs-4">MASS<span style="color:hsl(51, 91%, 60%);">&</span>MUSCLE<span class="fs-4" style="color:hsl(51, 91%, 60%);">.</span></a>
             <ul class="nav__items">
@@ -62,7 +64,7 @@ if (isset($_SESSION['user-id'])) {
                                                 <ul class="subnav">
                                                     <?php while ($pack = mysqli_fetch_assoc($packs)) : ?>
                                                         <li class="subnav-item">
-                                                            <a href="#" class="subnav-link">> <?=$pack['title'] ?></a>
+                                                            <a href="#" class="subnav-link">> <?= $pack['title'] ?></a>
                                                         </li>
                                                     <?php endwhile ?>
                                                 </ul>
@@ -242,88 +244,80 @@ if (isset($_SESSION['user-id'])) {
                         <div class="megamenu-content" aria-labelledby="megamenu-dropdown-3">
                             <div class="container  text-center mt-5 mb-5">
                                 <div class="row wrapper rounded fade show active" id="pills-home">
-                                    <div class="col-lg-3 col-md-4 p-4">
-                                        <div class="col menu-item">
-                                            <div class="card border-0 text-center">
-                                                <div class="card-body">
-                                                    <div class="notify-badge rounded-circle d-flex align-items-center justify-content-center vh-100 top-0 end-0" style="margin-top:4rem;">
-                                                        <span class="badge badge-secondary " style="font-size: 0.9rem;">New</span>
-                                                    </div>
-                                                    <div class="notify-badge rounded-circle d-flex align-items-center justify-content-center vh-100 top-0 end-0">
-                                                        <span class="badge badge-secondary " style="font-size: 0.9rem;">-7%</span>
-                                                    </div>
-                                                    <div class="card-image">
-                                                        <a href="<?= ROOT_URL ?>images/prod1.jpg" class="glightbox">
-                                                            <img src="<?= ROOT_URL ?>images/prod1.jpg" class="menu-img img-fluid" alt="" width="250">
-                                                        </a>
-                                                    </div>
-                                                    <div class="card-inner">
-                                                        <p class="fw-bolder">MUSCLE JUICE REVOLUTION 2600 –</h4>
-                                                        <div class="row align-items-center">
-                                                            <div class="col-6   text-end ">
-                                                                <p class="text-nowrap text-decoration-line-through fw-lighter">150.00 DT</p>
+                                    <?php if (mysqli_num_rows($products2) > 0) : ?>
+
+
+                                        <?php while ($product = mysqli_fetch_assoc($products2)) : ?>
+                                            <!-- get category title of each post from categories table -->
+
+                                            <div class="col-lg-3 col-md-4  p-4">
+                                                <div class="col menu-item">
+                                                    <div class="card border-0 text-center">
+                                                        <div class="card-body ">
+                                                            <?php if ($product['new'] && $product['promo'] == 0) : ?>
+                                                                <div class=" notify-badge rounded-circle d-flex align-items-center justify-content-center vh-100 top-0 end-0">
+                                                                    <span class="badge  badge-secondary " style="font-size: 0.9rem;">New</span>
+                                                                </div>
+                                                            <?php endif ?>
+                                                            <?php if ($product['new'] && $product['promo'] != 0) : ?>
+                                                                <div class=" notify-badge rounded-circle d-flex align-items-center justify-content-center vh-100 top-0 end-0 " style="margin-top: 3.5rem;">
+                                                                    <span class="badge  badge-secondary " style="font-size: 0.9rem;">New</span>
+                                                                </div>
+                                                            <?php endif ?>
+                                                            <?php if ($product['promo'] != 0) : ?>
+                                                                <div class="notify-badge  rounded-circle d-flex align-items-center justify-content-center vh-100 top-0 end-0 ">
+                                                                    <span class="badge badge-secondary " style="font-size: 0.9rem;">-<?= $product['promo'] ?>%</span>
+                                                                </div>
+                                                            <?php endif ?>
+
+                                                            <div class="card-image">
+
+                                                                <img src="<?= ROOT_URL ?>images/<?= $product['thumbnail'] ?>" class="menu-img prod_img" width="0">
+
                                                             </div>
-                                                            <div class="col-6  text-start" style="margin-right: -0.5rem;">
-                                                                <p class=" text-nowrap fw-bolder " style="color:hsl(51, 91%, 60%);">140.00 DT</p>
+
+                                                            <div class="card-inner prod__desc">
+                                                                <p class="fw-bolder  text-truncate prod_title"><?= $product['title'] ?></h4>
+
+                                                                <div class="row align-items-center">
+                                                                    <div class="col-6   text-end ">
+
+                                                                        <p class="text-nowrap text-decoration-line-through fw-lighter"><?= $product['prix_org'] ?> DT</p>
+                                                                    </div>
+                                                                    <div class="col-6  text-start prod_prix_aft">
+                                                                        <p class=" text-nowrap fw-bolder " style="color:hsl(51, 91%, 60%);"><?= $product['prix_aft'] ?> DT</p>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class=" d-flex justify-content-center">
+                                                                    <a href="<?= ROOT_URL ?>/producttest.php?id=<?= $product['id'] ?>&cat_id=<?= $product['category_id'] ?>">
+                                                                        <button class="button-86" role="button">Buy</button>
+                                                                    </a>
+                                                                </div>
+
                                                             </div>
                                                         </div>
-                                                        <div class="d-grid gap-2 col-lg-8 col-6 mx-auto">
-                                                            <button class="button-86" role="button">Details</button>
-                                                        </div>
                                                     </div>
-                                                </div>
+                                                </div><!-- Menu Item -->
                                             </div>
-                                        </div><!-- Menu Item -->
-                                    </div>
-                                    <div class="col-lg-3 col-md-4 p-4">
-                                        <div class="col  menu-item">
-                                            <div class="card border-0 text-center">
-                                                <div class="card-body">
-                                                    <div class="notify-badge rounded-circle d-flex align-items-center justify-content-center vh-100 top-0 end-0" style="margin-top:4rem;">
-                                                        <span class="badge badge-secondary " style="font-size: 0.9rem;">New</span>
-                                                    </div>
-                                                    <div class="notify-badge rounded-circle d-flex align-items-center justify-content-center vh-100 top-0 end-0">
-                                                        <span class="badge badge-secondary " style="font-size: 0.9rem;">-7%</span>
-                                                    </div>
+                                        <?php endwhile ?>
+                                    <?php else : ?>
+                                        <div class="alert__message error"><?= "No products found" ?></div>
+                                    <?php endif ?>
 
-                                                    <div class="card-image">
-                                                        <a href="<?= ROOT_URL ?>images/prod1.jpg" class="glightbox">
-                                                            <img src="<?= ROOT_URL ?>images/prod1.jpg" class="menu-img img-fluid" alt="" width="250">
-                                                        </a>
-                                                    </div>
-                                                    <div class="card-inner">
-                                                        <p class="fw-bolder">MUSCLE JUICE REVOLUTION 2600 –</h4>
 
-                                                        <div class="row align-items-center">
-                                                            <div class="col-6   text-end ">
-
-                                                                <p class="text-nowrap text-decoration-line-through fw-lighter">150.00 DT</p>
-                                                            </div>
-                                                            <div class="col-6  text-start" style="margin-right: -0.5rem;">
-                                                                <p class=" text-nowrap fw-bolder " style="color:hsl(51, 91%, 60%);">140.00 DT</p>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="d-grid gap-2 col-lg-8 col-6 mx-auto">
-                                                            <button class="button-86" role="button">Details</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div><!-- Menu Item -->
-                                    </div>
                                 </div>
                             </div>
                         </div>
                     </li>
                 </ul>
                 <li class="nav-item is-parent">
-                        <a class="nav-link text-black" href="<?= ROOT_URL ?>contact.php" aria-haspopup="true" aria-expanded="false">
-                            CONTACT <i class="fa fa-angle-down"></i>
-                        </a>
-                    </li>
+                    <a class="nav-link text-black" href="<?= ROOT_URL ?>contact.php" aria-haspopup="true" aria-expanded="false">
+                        CONTACT <i class="fa fa-angle-down"></i>
+                    </a>
+                </li>
             </ul>
-             <div class="megamenu-background" id="megamenu-background"></div>
+            <div class="megamenu-background" id="megamenu-background"></div>
         </div>
     </nav>
     <div class="megamenu-dim" id="megamenu-dim"></div>

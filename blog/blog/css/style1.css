@@ -255,4 +255,21 @@ section .section-title {
     .modal form label {
       font-weight: normal;
     }
-  
+  .spo_img > *{
+    max-width: 260px;
+  }
+  .prod_img{
+    height : 17rem;
+    object-fit:contain;
+    aspect-ratio: 3/2;
+  }
+  .prod_font{
+    font-size: 0.9rem;
+  }
+  .prod_title{
+    height:1rem;
+    margin-top:0.5rem;
+  }
+  .prod_prix_aft{
+    margin-right: -0.5rem;
+  }
