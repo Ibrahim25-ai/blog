@@ -161,3 +161,98 @@ section .section-title {
     width: 22.2rem;
       
     }
+  
+    .owl-carousel .owl-nav {
+      overflow: hidden;
+      height: 0px;
+    }
+  
+    .owl-theme .owl-dots .owl-dot.active span,
+    .owl-theme .owl-dots .owl-dot:hover span {
+      background: #5110e9;
+    }
+  
+    .owl-carousel .item {
+      text-align: center;
+    }
+  
+    .owl-carousel .nav-button {
+  
+      cursor: pointer;
+      position: absolute;
+      top: 110px !important;
+    }
+  
+    .owl-carousel .owl-prev.disabled,
+    .owl-carousel .owl-next.disabled {
+      pointer-events: none;
+      opacity: 0.25;
+    }
+  
+    .owl-carousel .owl-prev {
+      left: -35px;
+  
+    }
+  
+    .owl-carousel .owl-next {
+      right: -35px;
+    }
+  
+    .owl-theme .owl-nav [class*=owl-] {
+      color: #ffffff;
+      font-size: 39px;
+      background: #000000;
+      border-radius: 3px;
+    }
+  
+    .owl-carousel .prev-carousel:hover {
+      background-position: 0px -53px;
+    }
+  
+    .owl-carousel .next-carousel:hover {
+      background-position: -24px -53px;
+    }
+  
+    .modal .modal-dialog {
+      max-width: 400px;
+    }
+  
+    .modal .modal-header,
+    .modal .modal-body,
+    .modal .modal-footer {
+      padding: 20px 30px;
+    }
+  
+    .modal .modal-content {
+      border-radius: 3px;
+      font-size: 14px;
+    }
+  
+    .modal .modal-footer {
+      background: #ecf0f1;
+      border-radius: 0 0 3px 3px;
+    }
+  
+    .modal .modal-title {
+      display: inline-block;
+    }
+  
+    .modal .form-control {
+      border-radius: 2px;
+      box-shadow: none;
+      border-color: #dddddd;
+    }
+  
+    .modal textarea.form-control {
+      resize: vertical;
+    }
+  
+    .modal .btn {
+      border-radius: 2px;
+      min-width: 100px;
+    }
+  
+    .modal form label {
+      font-weight: normal;
+    }
+  

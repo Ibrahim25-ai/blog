@@ -1,14 +1,14 @@
 <?php
 include 'partials/header.php';
 
+
 $perPage = 5;
-$sqlQuery = "SELECT * FROM products";
+        $sqlQuery = "SELECT * FROM products";
         $result = mysqli_query($connection, $sqlQuery);
         $totalRecords = mysqli_num_rows($result);
         $totalPages = ceil($totalRecords/$perPage);
 
-
-// fetch all posts from posts table
+// fetch all posts from <posts table
 $query = "SELECT * FROM products ORDER BY date_time DESC";
 $products = mysqli_query($connection, $query);
 $query = "SELECT * FROM products WHERE category_id=2 ORDER BY date_time DESC";
@@ -22,11 +22,7 @@ $products4 = mysqli_query($connection, $query);
 $query = "SELECT * FROM products WHERE pack_id=6";
 $products5 = mysqli_query($connection, $query);
 
-?>
-
-
-
-
+?> 
 
 <section class="search__bar">
   <form class="container search__bar-container" action="<?= ROOT_URL ?>search.php" method="GET">
@@ -37,8 +33,6 @@ $products5 = mysqli_query($connection, $query);
     <button type="submit" name="submit" class="btn">Go</button>
   </form>
 </section>
-
-
 
 <section>
   <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
@@ -96,111 +90,20 @@ $products5 = mysqli_query($connection, $query);
 
       <div class="tab-pane fade active show" id="NEWP">
         <div class="container1 text-center mt-5 mb-5">
-          <div class="row wrapper rounded fade show active">
-          
-         <div id="pagination"></div>    
-                <input type="hidden" id="totalPages" value="<?php echo $totalPages; ?>">
-            <?php if (mysqli_num_rows($products3) > 0) : ?>
-
-
-              <?php while ($product = mysqli_fetch_array($resultoff)) : ?>
-                <!-- get category title of each post from categories table -->
-
-                <div class="col-lg-3 col-md-4  p-4">
-                  <div class="col menu-item">
-                    <div class="card border-0 text-center">
-                      <div class="card-body position-relative p-4">
-                      <?php if ($product['new'] && $product['promo'] == 0): ?>
-                      <div class=" notify-badge rounded-circle d-flex align-items-center justify-content-center vh-100 top-0 end-0" >
-                        <span class="badge  badge-secondary " style="font-size: 0.9rem;">New</span>
-                      </div>
-                    <?php endif ?>
-                    <?php if ($product['new'] && $product['promo'] != 0): ?>
-                      <div class=" notify-badge rounded-circle d-flex align-items-center justify-content-center vh-100 top-0 end-0 " style="margin-top: 3.5rem;">
-                        <span class="badge  badge-secondary " style="font-size: 0.9rem;">New</span>
-                      </div>
-                    <?php endif ?>
-                    <?php if ($product['promo'] != 0) : ?>
-                      <div class="notify-badge  rounded-circle d-flex align-items-center justify-content-center vh-100 top-0 end-0 ">
-                        <span class="badge badge-secondary " style="font-size: 0.9rem;">-<?= $product['promo'] ?>%</span>
-                      </div>
-                    <?php endif ?>
-
-                        <div class="card-image">
-
-                          <img style="height : 17rem;" src="<?= ROOT_URL ?>images/<?= $product['thumbnail'] ?>" class="menu-img " width="0">
-
-                        </div>
-
-                        <div class="card-inner prod__desc">
-                          <p style="height:1rem;margin-top:0.5rem;" class="fw-bolder  text-truncate "><?= $product['title'] ?></h4>
-
-                          <div class="row align-items-center">
-                            <div class="col-6   text-end ">
-
-                              <p class="text-nowrap text-decoration-line-through fw-lighter"><?= $product['prix_org'] ?> DT</p>
-                            </div>
-                            <div class="col-6  text-start" style="margin-right: -0.5rem;">
-                              <p class=" text-nowrap fw-bolder " style="color:hsl(51, 91%, 60%);"><?= $product['prix_aft'] ?> DT</p>
-                            </div>
-                          </div>
-
-                          <div class=" d-flex justify-content-center">
-                            <a href="<?= ROOT_URL ?>/producttest.php?id=<?= $product['id'] ?>">
-                              <button class="button-86" role="button">Buy</button>
-                            </a>
-                          </div>
-
-                        </div>
-                      </div>
-                    </div>
-                  </div><!-- Menu Item -->
-                </div>
-              <?php endwhile ?>
-            <?php else : ?>
-              <div class="alert__message error"><?= "No products found" ?></div>
-            <?php endif ?>
-            <div class="col-lg-3 col-md-4  p-4">
-              <div class="col menu-item">
-                <div class="card border-0 text-center">
-                  <div class="card-body">
-                    <div class="notify-badge rounded-circle d-flex align-items-center justify-content-center vh-100 top-0 end-0" style="margin-top:4rem;">
-                      <span class="badge badge-secondary " style="font-size: 0.9rem;">New</span>
-                    </div>
-                    <div class="notify-badge rounded-circle d-flex align-items-center justify-content-center vh-100 top-0 end-0">
-                      <span class="badge badge-secondary " style="font-size: 0.9rem;">-7%</span>
-                    </div>
-
-                    <div class="card-image">
-                      <a href="<?= ROOT_URL ?>images/prod1.jpg" class="glightbox">
-                        <img src="<?= ROOT_URL ?>images/prod1.jpg" class="menu-img img-fluid" alt="" width="250">
-                      </a>
-                    </div>
-                    <div class="card-inner prod__desc   ">
-                      <p class="fw-bolder">MUSCLE JUICE REVOLUTION 2600 –</h4>
-
-                      <div class="row align-items-center">
-                        <div class="col-6   text-end ">
-
-                          <p class="text-nowrap text-decoration-line-through fw-lighter">150.00 DT</p>
-                        </div>
-                        <div class="col-6  text-start" style="margin-right: -0.5rem;">
-                          <p class=" text-nowrap fw-bolder " style="color:hsl(51, 91%, 60%);">140.00 DT</p>
-                        </div>
-                      </div>
-
-                      <div class=" d-flex justify-content-center">
-                        <button class="button-86" role="button">Details</button>
-                      </div>
-
-                    </div>
-                  </div>
-                </div>
-              </div><!-- Menu Item -->
-            </div>
-
+        <nav>
+  <ul class="pagination">
+    <?php for ($i = 1; $i <= $totalPages; $i++) : ?>
+      <li class="page-item <?php if ($i == 1) echo 'active'; ?>">
+        <a href="#" class="page-link pagination-link" data-page-number="<?= $i ?>"><?= $i ?></a>
+      </li>
+    <?php endfor ?>
+  </ul>
+</nav>  
+          <div id="product-list" class="row wrapper rounded fade show active">
+            
           </div>
         </div>
+        
       </div>
     </div>
 
@@ -250,7 +153,7 @@ $products5 = mysqli_query($connection, $query);
                           </div>
 
                           <div class=" d-flex justify-content-center">
-                            <a href="<?= ROOT_URL ?>/producttest.php?id=<?= $product['id'] ?>">
+                            <a href="<?= ROOT_URL ?>/producttest.php?id=<?= $product['id'] ?>&cat_id=<?= $product['category_id'] ?>">
                               <button class="button-86" role="button">Buy</button>
                             </a>
                           </div>
@@ -262,7 +165,7 @@ $products5 = mysqli_query($connection, $query);
                 </div>
               <?php endwhile ?>
             <?php else : ?>
-              <div class="alert__message error"><?= "No products found" ?></div>zizou1234567
+              <div class="alert__message error"><?= "No products found" ?></div>
             <?php endif ?>
             
 
@@ -319,7 +222,7 @@ $products5 = mysqli_query($connection, $query);
                           </div>
 
                           <div class=" d-flex justify-content-center">
-                            <a href="<?= ROOT_URL ?>/producttest.php?id=<?= $product['id'] ?>">
+                            <a href="<?= ROOT_URL ?>/producttest.php?id=<?= $product['id'] ?>&cat_id=<?= $product['category_id'] ?>">
                               <button class="button-86" role="button">Buy</button>
                             </a>
                           </div>
@@ -379,32 +282,9 @@ $products5 = mysqli_query($connection, $query);
 
   </div>
 
-  <ul class="pagination">
-<?php if($page_no > 1){
-echo "<li><a href='?page_no=1'>First Page</a></li>";
-} ?>
-    
-<li <?php if($page_no <= 1){ echo "class='disabled'"; } ?>>
-<a <?php if($page_no > 1){
-echo "href='?page_no=$previous_page'";
-} ?>>Previous</a>
-</li>
-    
-<li <?php if($page_no >= $total_no_of_pages){
-echo "class='disabled'";
-} ?>>
-<a <?php if($page_no < $total_no_of_pages) {
-echo "href='?page_no=$next_page'";
-} ?>>Next</a>
-</li>
-
-<?php if($page_no < $total_no_of_pages){
-echo "<li><a href='?page_no=$total_no_of_pages'>Last &rsaquo;&rsaquo;</a></li>";
-} ?>
-</ul>
-
 </section>
-
+  
+           
 <section>
   <div class="container-fluid  mt-5 ">
     <div class="row g-0 justify-content-center ">
@@ -734,35 +614,32 @@ echo "<li><a href='?page_no=$total_no_of_pages'>Last &rsaquo;&rsaquo;</a></li>";
     </div>
   </div>
 </section>
-<script type="text/javascript">
-        $(document).ready(function(){
-            var totalPage = parseInt($('#totalPages').val());   
-            console.log("==totalPage=="+totalPage);
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-            var pag = $('#pagination').simplePaginator({
-                totalPages: totalPage,
-                maxButtonsVisible: 5,
-                currentPage: 1,
-                nextLabel: 'Next',
-                prevLabel: 'Prev',
-                firstLabel: 'First',
-                lastLabel: 'Last',
-                clickCurrentPage: true,
-                pageChange: function(page) {            
-                    $("#content").html('<tr><td colspan="6"><strong>loading...</strong></td></tr>');
-                    $.ajax({
-                        url:"load_data.php",
-                        method:"POST",
-                        dataType: "json",       
-                        data:{page: page},
-                        success:function(responseData){
-                            $('#content').html(responseData.html);
-                        }
-                    });
-                }       
-            });
-        });
-    </script>
+<script>
+  $(document).ready(function() {
+    var page = 1; // initial page
+    load_data(page); // load initial data
+  
+    function load_data(page) {
+      $.ajax({
+        url: 'load_data.php',
+        method: 'POST',
+        data: {page: page},
+        dataType: 'json',
+        success: function(data) {
+          $('#product-list').html(data.html); // update HTML of container element
+        }
+      });
+    }
+  
+    $(document).on('click', '.pagination-link', function(event) {
+      event.preventDefault();
+      page = $(this).data('page-number');
+      load_data(page); // load data for clicked page
+    });
+  });
+</script>
 <?php
 include 'partials/footer.php';
 
