@@ -1,14 +1,14 @@
 <?php
 require 'config/database.php';
 
-var_dump("tesst");
+
 if (isset($_POST['submit'])) {
     $id = filter_var($_POST['id'], FILTER_SANITIZE_NUMBER_INT);
     $name = filter_var($_POST['name'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $email = filter_var($_POST['email'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $adresse = filter_var($_POST['adr'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $tel =   filter_var($_POST['tel'], FILTER_SANITIZE_NUMBER_INT);
-    var_dump($name);
+
 
 
     // set is_featured to 0 if unchecked
@@ -40,9 +40,7 @@ if (isset($_POST['submit'])) {
         $query = "INSERT INTO commande (name, email, tel,product_id,adresse) VALUES ('$name', '$email', $tel,$id,'$adresse')";
 
         $result = mysqli_query($connection, $query);
-        var_dump($result);
-        var_dump($query);
-        echo "tessst";
+        
         if (!mysqli_errno($connection)) {
             $_SESSION['add-command-success'] = "New command added successfully";
             header('location: ' . ROOT_URL. 'blog.php' );
