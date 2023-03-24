@@ -44,7 +44,7 @@ if (isset($_SESSION['user-id'])) {
 
             <img class="logo__img" src="<?= ROOT_URL ?>images/mass.png" >
 
-            <a href="<?= ROOT_URL ?>" class="nav__logo fw-bold fs-4">MASS<span style="color:hsl(51, 91%, 60%);">&</span>MUSCLE<span class="fs-4" style="color:hsl(51, 91%, 60%);">.</span></a>
+            <a href="blog.php" class="nav__logo fw-bold fs-4">MASS<span style="color:hsl(51, 91%, 60%);">&</span>MUSCLE<span class="fs-4" style="color:hsl(51, 91%, 60%);">.</span></a>
             <ul class="nav__items">
                 <ul class="megamenu-nav d-flex justify-content-center " role="menu">
                     <li class="nav-item is-parent">

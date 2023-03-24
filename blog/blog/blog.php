@@ -176,24 +176,7 @@ $products5 = mysqli_query($connection, $query);
                         <img src="<?= ROOT_URL ?>images/prod1.jpg" class="menu-img img-fluid" alt="" width="250">
                       </a>
                     </div>
-                    <div class="card-inner prod__desc   ">
-                      <p class="fw-bolder">MUSCLE JUICE REVOLUTION 2600 –</h4>
-
-                      <div class="row align-items-center">
-                        <div class="col-6   text-end ">
-
-                          <p class="text-nowrap text-decoration-line-through fw-lighter">150.00 DT</p>
-                        </div>
-                        <div class="col-6  text-start" style="margin-right: -0.5rem;">
-                          <p class=" text-nowrap fw-bolder " style="color:hsl(51, 91%, 60%);">140.00 DT</p>
-                        </div>
-                      </div>
-
-                      <div class=" d-flex justify-content-center">
-                        <button class="button-86" role="button">Details</button>
-                      </div>
-
-                    </div>
+                  
                   </div>
                 </div>
               </div><!-- Menu Item -->
