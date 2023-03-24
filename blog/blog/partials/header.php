@@ -64,7 +64,7 @@ if (isset($_SESSION['user-id'])) {
                                                 <ul class="subnav">
                                                     <?php while ($pack = mysqli_fetch_assoc($packs)) : ?>
                                                         <li class="subnav-item">
-                                                            <a href="#" class="subnav-link">> <?= $pack['title'] ?></a>
+                                                            <a href="<?= ROOT_URL ?>/index.php?id=<?= $pack['id'] ?>" class="subnav-link">> <?= $pack['title'] ?></a>
                                                         </li>
                                                     <?php endwhile ?>
                                                 </ul>
