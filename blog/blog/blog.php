@@ -90,6 +90,7 @@ $products5 = mysqli_query($connection, $query);
 
       <div class="tab-pane fade active show" id="NEWP">
         <div class="container1 text-center mt-5 mb-5">
+
         <nav>
   <ul class="pagination">
     <?php for ($i = 1; $i <= $totalPages; $i++) : ?>
@@ -101,6 +102,7 @@ $products5 = mysqli_query($connection, $query);
 </nav>  
           <div id="product-list" class="row wrapper rounded fade show active">
             
+
           </div>
         </div>
         
@@ -281,6 +283,10 @@ $products5 = mysqli_query($connection, $query);
     </div>
 
   </div>
+
+
+
+
 
 </section>
   
