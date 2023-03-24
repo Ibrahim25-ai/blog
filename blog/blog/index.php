@@ -44,8 +44,6 @@ if (isset($_GET['id'])) {
   <div class="container1 text-center mt-5 mb-5">
     <div class="row wrapper rounded fade show active">
     
-   <div id="pagination"></div>    
-          <input type="hidden" id="totalPages" value="<?php echo $totalPages; ?>">
       <?php if (mysqli_num_rows($result) > 0) : ?>
 
 
