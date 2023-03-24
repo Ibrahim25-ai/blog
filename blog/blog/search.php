@@ -3,7 +3,7 @@ require 'partials/header.php';
 
 if (isset($_GET['search']) && isset($_GET['submit'])) {
     $search = filter_var($_GET['search'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-    $query = "SELECT * FROM posts WHERE title LIKE '%$search%' ORDER BY date_time DESC";
+    $query = "SELECT * FROM products WHERE title LIKE '%$search%' ORDER BY date_time DESC";
     $posts = mysqli_query($connection, $query);
 } else {
     header('location: ' . ROOT_URL . 'blog.php');
@@ -15,58 +15,84 @@ if (isset($_GET['search']) && isset($_GET['submit'])) {
 
 
 
-<?php if (mysqli_num_rows($posts) > 0) : ?>
-    <section class="posts section__extra-margin">
-        <div class="container posts__container">
-            <?php while ($post = mysqli_fetch_assoc($posts)) : ?>
-                <article class="post">
-                    <div class="post__thumbnail">
-                        <img src="./images/<?= $post['thumbnail'] ?>">
-                    </div>
-                    <div class="post__info">
-                        <?php
-                        // fetch category from categories table using category_id of post
-                        $category_id = $post['category_id'];
-                        $category_query = "SELECT * FROM categories WHERE id=$category_id";
-                        $category_result = mysqli_query($connection, $category_query);
-                        $category = mysqli_fetch_assoc($category_result);
-                        ?>
-                        <a href="<?= ROOT_URL ?>category-posts.php?id=<?= $post['category_id'] ?>" class="category__button"><?= $category['title'] ?></a>
-                        <h3 class="post__title">
-                            <a href="<?= ROOT_URL ?>post.php?id=<?= $post['id'] ?>"><?= $post['title'] ?></a>
-                        </h3>
-                        <p class="post__body">
-                            <?= substr($post['body'], 0, 150) ?>...
-                        </p>
-                        <div class="post__author">
-                            <?php
-                            // fetch author from users table using author_id
-                            $author_id = $post['author_id'];
-                            $author_query = "SELECT * FROM users WHERE id=$author_id";
-                            $author_result = mysqli_query($connection, $author_query);
-                            $author = mysqli_fetch_assoc($author_result);
 
-                            ?>
-                            <div class="post__author-avatar">
-                                <img src="./images/<?= $author['avatar'] ?>">
-                            </div>
-                            <div class="post__author-info">
-                                <h5>By: <?= "{$author['firstname']} {$author['lastname']}" ?></h5>
-                                <small>
-                                    <?= date("M d, Y - H:i", strtotime($post['date_time'])) ?>
-                                </small>
-                            </div>
-                        </div>
+<div class="tab-content" data-aos="fade-up" data-aos-delay="300">
+
+<div class="tab-pane fade active show" id="NEWP">
+  <div class="container1 text-center mt-5 mb-5">
+    <div class="row wrapper rounded fade show active">
+    
+   <div id="pagination"></div>    
+          <input type="hidden" id="totalPages" value="<?php echo $totalPages; ?>">
+      <?php if (mysqli_num_rows($posts) > 0) : ?>
+
+
+        <?php while ($product = mysqli_fetch_array($posts)) : ?>
+          <!-- get category title of each post from categories table -->
+
+          <div class="col-lg-3 col-md-4  p-4">
+            <div class="col menu-item">
+              <div class="card border-0 text-center">
+                <div class="card-body position-relative p-4">
+                <?php if ($product['new'] && $product['promo'] == 0): ?>
+                <div class=" notify-badge rounded-circle d-flex align-items-center justify-content-center vh-100 top-0 end-0" >
+                  <span class="badge  badge-secondary " style="font-size: 0.9rem;">New</span>
+                </div>
+              <?php endif ?>
+              <?php if ($product['new'] && $product['promo'] != 0): ?>
+                <div class=" notify-badge rounded-circle d-flex align-items-center justify-content-center vh-100 top-0 end-0 " style="margin-top: 3.5rem;">
+                  <span class="badge  badge-secondary " style="font-size: 0.9rem;">New</span>
+                </div>
+              <?php endif ?>
+              <?php if ($product['promo'] != 0) : ?>
+                <div class="notify-badge  rounded-circle d-flex align-items-center justify-content-center vh-100 top-0 end-0 ">
+                  <span class="badge badge-secondary " style="font-size: 0.9rem;">-<?= $product['promo'] ?>%</span>
+                </div>
+              <?php endif ?>
+
+                  <div class="card-image">
+
+                    <img style="height : 17rem;" src="<?= ROOT_URL ?>images/<?= $product['thumbnail'] ?>" class="menu-img " width="0">
+
+                  </div>
+
+                  <div class="card-inner prod__desc">
+                    <p style="height:1rem;margin-top:0.5rem;" class="fw-bolder  text-truncate "><?= $product['title'] ?></h4>
+
+                    <div class="row align-items-center">
+                      <div class="col-6   text-end ">
+
+                        <p class="text-nowrap text-decoration-line-through fw-lighter"><?= $product['prix_org'] ?> DT</p>
+                      </div>
+                      <div class="col-6  text-start" style="margin-right: -0.5rem;">
+                        <p class=" text-nowrap fw-bolder " style="color:hsl(51, 91%, 60%);"><?= $product['prix_aft'] ?> DT</p>
+                      </div>
                     </div>
-                </article>
-            <?php endwhile ?>
-        </div>
-    </section>
-<?php else : ?>
-    <div class="alert__message error lg section__extra-margin">
-        <p>No posts found for this search</p>
+
+                    <div class=" d-flex justify-content-center">
+                      <a href="<?= ROOT_URL ?>/producttest.php?id=<?= $product['id'] ?>">
+                        <button class="button-86" role="button">Buy</button>
+                      </a>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div><!-- Menu Item -->
+          </div>
+        <?php endwhile ?>
+      <?php else : ?>
+        <div class="alert__message error"><?= "No products found" ?></div>
+      <?php endif ?>
+      <div class="col-lg-3 col-md-4  p-4">
+        <!-- Menu Item -->
+      </div>
+
     </div>
-<?php endif ?>
+  </div>
+</div>
+</div>
+            
 <!--====================== END OF POSTS ====================-->
 
 

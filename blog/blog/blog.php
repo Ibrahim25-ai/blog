@@ -99,6 +99,7 @@ $products5 = mysqli_query($connection, $query);
             </ul>
           </nav>
           <div id="product-list" class="row wrapper rounded fade show active">
+
           </div>
         </div>
       </div>
@@ -287,6 +288,10 @@ $products5 = mysqli_query($connection, $query);
     </div>
 
   </div>
+
+
+
+
 
 </section>
 
