@@ -20,21 +20,8 @@ if (isset($_GET['id'])) {
 ?>
 
 <section>
-    <div class="container">
-     <div class="row">  
-        <div class="col-12">
-<img class="nos img-fluid" src="images/NOS.png" height="35px" width="30px">
-<style>
-.nos{
-    filter:brightness(0.85);
+    
 
-}
-
-    </style>
-
-</div>
-</div>
-</div> 
 </section>
 
 <section>
@@ -42,6 +29,8 @@ if (isset($_GET['id'])) {
 
 <div class="tab-pane fade active show" id="NEWP">
   <div class="container1 text-center mt-5 mb-5">
+  <img class="nos img-fluid mx-auto d-block mt-5 mb-5 p-2" src="images/nospacks.png">
+
     <div class="row wrapper rounded fade show active">
     
       <?php if (mysqli_num_rows($result) > 0) : ?>

@@ -273,3 +273,23 @@ section .section-title {
   .prod_prix_aft{
     margin-right: -0.5rem;
   }
+  .nos{
+    object-fit:fill;
+    height: auto;
+    
+    
+    border-radius: 3rem;
+  }
+  .navig {
+    margin-right: 20rem;
+  }
+  .badge-secondary{
+    font-size: 0.9rem;
+  }
+  @media screen and (max-width:600px) {
+  
+    .navig {
+      margin-right: 5rem;
+    }
+  }
+ 
