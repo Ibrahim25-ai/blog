@@ -15,7 +15,12 @@ $result = mysqli_query($connection, $sqlQuery);
     $paginationHtml = '';
 
     while ($product = mysqli_fetch_assoc($result)) {  
-        
+      
+            
+
+          
+
+              
       $paginationHtml.='
       
       <div class="col-lg-3 col-md-4  p-4">
@@ -24,36 +29,42 @@ $result = mysqli_query($connection, $sqlQuery);
                     ';
                     if ($product['new'] && $product['promo'] == 0){
                         $paginationHtml.='<div class=" notify-badge rounded-circle d-flex align-items-center justify-content-center vh-100 top-0 end-0" >
-                          <span class="badge  badge-secondary " style="font-size: 0.9rem;">New</span>
+                          <span class="badge  badge-secondary ">New</span>
                         </div>';
                     }
                     if ($product['new'] && $product['promo'] != 0){
                         $paginationHtml.='<div class=" notify-badge rounded-circle d-flex align-items-center justify-content-center vh-100 top-0 end-0 " style="margin-top: 3.5rem;">
-                          <span class="badge  badge-secondary " style="font-size: 0.9rem;">New</span>
+                          <span class="badge  badge-secondary " >New</span>
                         </div>';
                     }
                 if ($product['promo'] != 0){
                     $paginationHtml.='<div class="notify-badge rounded-circle d-flex align-items-center justify-content-center vh-100 top-0 end-0">
-                            <span class="badge badge-secondary " style="font-size: 0.9rem;">-'.$product['promo'].'%</span>
+                            <span class="badge badge-secondary ">-'.$product['promo'].'%</span>
                           </div>';
                 }
 
                 
-                $paginationHtml.='<div class="card-image"><img style="height : 17rem;" src="images/'.$product['thumbnail'].'" class="menu-img " width="0"></div>
-                        <div class="card-inner prod__desc">
-                          <p style="height:1rem;margin-top:0.5rem;" class="fw-bolder  text-truncate ">'.$product['title'].'</h4>
-                          <div class="row align-items-center">
-                            <div class="col-6   text-end ">
-                              <p class="text-nowrap text-decoration-line-through fw-lighter">'.$product['prix_org'].' DT</p>
-                            </div>
-                            <div class="col-6  text-start" style="margin-right: -0.5rem;">
-                              <p class=" text-nowrap fw-bolder " style="color:hsl(51, 91%, 60%);">'.$product['prix_aft'].' DT</p>
-                            </div>
-                          </div>
-                          <div class=" d-flex justify-content-center">
-                            <a href="producttest.php?id='.$product['id'].'&cat_id='.$product['category_id'].'">
-                              <button class="button-86" role="button">Buy</button>
-                            </a></div></div></div></div></div><!-- Menu Item --></div>
+                $paginationHtml.='<div class="card-image"><img src="images/'.$product['thumbnail'].'" class="menu-img prod_img" width="0"></div>
+                <div class="card-inner prod__desc">
+                  <h4 class="fw-bolder  text-truncate prod_title">'.$product['title'].'</h4>
+                  <div class="row align-items-center">
+                    <div class="col-6   text-end ">
+                      <p class="text-nowrap text-decoration-line-through fw-lighter">'.$product['prix_org'].' DT</p>
+                    </div>
+                    <div class="col-6  text-start prod_prix_aft">
+                      <p class=" text-nowrap fw-bolder " style="color:hsl(51, 91%, 60%);">'.$product['prix_aft'].' DT</p>
+                    </div>
+                  </div>
+                  <div class=" d-flex justify-content-center">
+                    <a href="producttest.php?id='.$product['id'].'&cat_id='.$product['category_id'].'">
+                      <button class="button-86" role="button">Buy</button>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div><!-- Menu Item -->
+        </div>
       ';
 
      

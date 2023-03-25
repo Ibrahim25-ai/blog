@@ -13,9 +13,10 @@ $query = "SELECT * FROM products ORDER BY date_time DESC";
 $products = mysqli_query($connection, $query);
 $query = "SELECT * FROM products WHERE category_id=2 ORDER BY date_time DESC";
 $products1 = mysqli_query($connection, $query);
-$query = "SELECT * FROM products WHERE new=1";
+$query = "SELECT * FROM products WHERE new=1 LIMIT 1,12";
 $products3 = mysqli_query($connection, $query);
-$query = "SELECT * FROM products ORDER BY promo DESC";
+
+$query = "SELECT * FROM products ORDER BY promo DESC LIMIT 1,12";
 $products2 = mysqli_query($connection, $query);
 $query = "SELECT * FROM products WHERE category_id=2";
 $products4 = mysqli_query($connection, $query);
@@ -65,13 +66,11 @@ $products5 = mysqli_query($connection, $query);
 <section id="tabs">
   <div class="container-fluid p-5" data-aos="fade-up">
     <div class="section-header  text-center">
-
       <p class="fw-bold fs-4" style="color:hsl(51, 91%, 60%);">WELCOME TO MASS<span>&</span>MUSCLE</p>
       <p class="fw-bolder fs-2 text-black mt-5">OUR PRODUCTS</p>
     </div>
 
     <ul class="nav nav-tabs d-flex justify-content-center text-black mt-5" data-aos="fade-up" daqqwqwqqwta-aos-delay="200">
-
       <li class="nav-item">
         <button class="nav-link active show" id="pills-home-ab" data-bs-toggle="pill" data-bs-target="#NEWP" type="button" role="tab" aria-controls="pills-home" aria-selected="true">NEW PRODUCTS</button>
       </li><!-- End tab nav item -->
@@ -80,26 +79,28 @@ $products5 = mysqli_query($connection, $query);
       </li>
       <li class="nav-item">
         <button class="nav-link " id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#TEST" type="button" role="tab" aria-controls="pills-home" aria-selected="true">BEST SALES</button>
-      </li><!-- End tab nav item -->
-
-      <!-- End tab nav item -->
-
+      </li>
     </ul>
 
     <div class="tab-content" data-aos="fade-up" data-aos-delay="300">
       <div class="tab-pane fade active show" id="NEWP">
         <div class="container1 text-center mt-5 mb-5">
           <nav>
-            <ul class="pagination">
+            <ul class="pagination navig justify-content-end ">
+              <li class="page-item ">
+                <a class="page-link link-prev text-dark" href="#">Previous</a>
+              </li>
               <?php for ($i = 1; $i <= $totalPages; $i++) : ?>
-                <li class="page-item <?php if ($i == 1) echo 'active'; ?>">
-                  <a href="#" class="page-link pagination-link" data-page-number="<?= $i ?>"><?= $i ?></a>
+                <li class="page-item">
+                  <a href="#" class="page-link pagination-link text-dark" data-page-number="<?= $i ?>"><?= $i ?></a>
                 </li>
               <?php endfor ?>
+              <li class="page-item">
+                <a class="page-link link-next text-dark" href="#">Next</a>
+              </li>
             </ul>
           </nav>
           <div id="product-list" class="row wrapper rounded fade show active">
-
           </div>
         </div>
       </div>
@@ -108,18 +109,77 @@ $products5 = mysqli_query($connection, $query);
       <div class="tab-pane fade  " id="TOPROM">
         <div class="container1 text-center mt-5 mb-5 ">
           <div class="row wrapper rounded fade show active">
-
             <?php if (mysqli_num_rows($products2) > 0) : ?>
-
-
               <?php while ($product = mysqli_fetch_assoc($products2)) : ?>
-                <!-- get category title of each post from categories table -->
-
                 <div class="col-lg-3 col-md-4  p-4">
                   <div class="col menu-item">
                     <div class="card border-0 text-center">
                       <div class="card-body ">
-                      <?php if ($product['new'] && $product['promo'] == 0) : ?>
+                        <?php if ($product['new'] && $product['promo'] == 0) : ?>
+                          <div class=" notify-badge rounded-circle d-flex align-items-center justify-content-center vh-100 top-0 end-0">
+                            <span class="badge  badge-secondary " >New</span>
+                          </div>
+                        <?php endif ?>
+                        <?php if ($product['new'] && $product['promo'] != 0) : ?>
+                          <div class=" notify-badge rounded-circle d-flex align-items-center justify-content-center vh-100 top-0 end-0 " style="margin-top: 3.5rem;">
+                            <span class="badge  badge-secondary ">New</span>
+                          </div>
+                        <?php endif ?>
+                        <?php if ($product['promo'] != 0) : ?>
+                          <div class="notify-badge  rounded-circle d-flex align-items-center justify-content-center vh-100 top-0 end-0 ">
+                            <span class="badge badge-secondary ">-<?= $product['promo'] ?>%</span>
+                          </div>
+                        <?php endif ?>
+
+                        <div class="card-image">
+
+                          <img src="<?= ROOT_URL ?>images/<?= $product['thumbnail'] ?>" class="menu-img prod_img" width="0">
+
+                        </div>
+
+                        <div class="card-inner prod__desc">
+                          <p class="fw-bolder  text-truncate prod_title"><?= $product['title'] ?></h4>
+
+                          <div class="row align-items-center">
+                            <div class="col-6   text-end ">
+
+                              <p class="text-nowrap text-decoration-line-through fw-lighter"><?= $product['prix_org'] ?> DT</p>
+                            </div>
+                            <div class="col-6  text-start prod_prix_aft">
+                              <p class=" text-nowrap fw-bolder " style="color:hsl(51, 91%, 60%);"><?= $product['prix_aft'] ?> DT</p>
+                            </div>
+                          </div>
+
+                          <div class=" d-flex justify-content-center">
+                            <a href="<?= ROOT_URL ?>/producttest.php?id=<?= $product['id'] ?>&cat_id=<?= $product['category_id'] ?>">
+                              <button class="button-86" role="button">Buy</button>
+                            </a>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div><!-- Menu Item -->
+                </div>
+              <?php endwhile ?>
+            <?php else : ?>
+              <div class="alert__message error"><?= "No products found" ?></div>
+            <?php endif ?>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tab-content" data-aos="fade-up" data-aos-delay="300">
+      <div class="tab-pane fade " id="TEST">
+        <div class="container1 text-center mt-5 mb-5">
+          <div class="row wrapper rounded fade show active">
+            <?php if (mysqli_num_rows($products3) > 0) : ?>
+              <?php while ($product = mysqli_fetch_assoc($products3)) : ?>
+                <div class="col-lg-3 col-md-4  p-4">
+                  <div class="col menu-item">
+                    <div class="card border-0 text-center">
+                      <div class="card-body ">
+                        <?php if ($product['new'] && $product['promo'] == 0) : ?>
                           <div class=" notify-badge rounded-circle d-flex align-items-center justify-content-center vh-100 top-0 end-0">
                             <span class="badge  badge-secondary " style="font-size: 0.9rem;">New</span>
                           </div>
@@ -169,133 +229,12 @@ $products5 = mysqli_query($connection, $query);
             <?php else : ?>
               <div class="alert__message error"><?= "No products found" ?></div>
             <?php endif ?>
-
-
-
           </div>
         </div>
       </div>
     </div>
-
-    <div class="tab-content" data-aos="fade-up" data-aos-delay="300">
-
-      <div class="tab-pane fade " id="TEST">
-        <div class="container1 text-center mt-5 mb-5">
-          <div class="row wrapper rounded fade show active">
-
-            <?php if (mysqli_num_rows($products3) > 0) : ?>
-
-
-              <?php while ($product = mysqli_fetch_assoc($products3)) : ?>
-                <!-- get category title of each post from categories table -->
-
-                <div class="col-lg-3 col-md-4  p-4">
-                  <div class="col menu-item">
-                    <div class="card border-0 text-center">
-                      <div class="card-body ">
-                      <?php if ($product['new'] && $product['promo'] == 0) : ?>
-                          <div class=" notify-badge rounded-circle d-flex align-items-center justify-content-center vh-100 top-0 end-0">
-                            <span class="badge  badge-secondary " style="font-size: 0.9rem;">New</span>
-                          </div>
-                        <?php endif ?>
-                        <?php if ($product['new'] && $product['promo'] != 0) : ?>
-                          <div class=" notify-badge rounded-circle d-flex align-items-center justify-content-center vh-100 top-0 end-0 " style="margin-top: 3.5rem;">
-                            <span class="badge  badge-secondary " style="font-size: 0.9rem;">New</span>
-                          </div>
-                        <?php endif ?>
-                        <?php if ($product['promo'] != 0) : ?>
-                          <div class="notify-badge  rounded-circle d-flex align-items-center justify-content-center vh-100 top-0 end-0 ">
-                            <span class="badge badge-secondary " style="font-size: 0.9rem;">-<?= $product['promo'] ?>%</span>
-                          </div>
-                        <?php endif ?>
-
-                        <div class="card-image">
-
-                          <img style="height : 17rem;" src="<?= ROOT_URL ?>images/<?= $product['thumbnail'] ?>" class="menu-img " width="0">
-
-                        </div>
-
-                        <div class="card-inner prod__desc">
-                          <p style="height:1rem;margin-top:0.5rem;" class="fw-bolder  text-truncate "><?= $product['title'] ?></h4>
-
-                          <div class="row align-items-center">
-                            <div class="col-6   text-end ">
-
-                              <p class="text-nowrap text-decoration-line-through fw-lighter"><?= $product['prix_org'] ?> DT</p>
-                            </div>
-                            <div class="col-6  text-start" style="margin-right: -0.5rem;">
-                              <p class=" text-nowrap fw-bolder " style="color:hsl(51, 91%, 60%);"><?= $product['prix_aft'] ?> DT</p>
-                            </div>
-                          </div>
-
-                          <div class=" d-flex justify-content-center">
-                            <a href="<?= ROOT_URL ?>/producttest.php?id=<?= $product['id'] ?>&cat_id=<?= $product['category_id'] ?>">
-                              <button class="button-86" role="button">Buy</button>
-                            </a>
-                          </div>
-
-                        </div>
-                      </div>
-                    </div>
-                  </div><!-- Menu Item -->
-                </div>
-              <?php endwhile ?>
-            <?php else : ?>
-              <div class="alert__message error"><?= "No products found" ?></div>
-            <?php endif ?>
-            <div class="col-lg-3 col-md-4  p-4">
-              <div class="col menu-item">
-                <div class="card border-0 text-center">
-                  <div class="card-body">
-                    <div class="notify-badge rounded-circle d-flex align-items-center justify-content-center vh-100 top-0 end-0" style="margin-top:4rem;">
-                      <span class="badge badge-secondary " style="font-size: 0.9rem;">New</span>
-                    </div>
-                    <div class="notify-badge rounded-circle d-flex align-items-center justify-content-center vh-100 top-0 end-0">
-                      <span class="badge badge-secondary " style="font-size: 0.9rem;">-7%</span>
-                    </div>
-
-                    <div class="card-image">
-                      <a href="<?= ROOT_URL ?>images/prod1.jpg" class="glightbox">
-                        <img src="<?= ROOT_URL ?>images/prod1.jpg" class="menu-img img-fluid" alt="" width="250">
-                      </a>
-                    </div>
-                    <div class="card-inner prod__desc   ">
-                      <p class="fw-bolder">MUSCLE JUICE REVOLUTION 2600 –</h4>
-
-                      <div class="row align-items-center">
-                        <div class="col-6   text-end ">
-
-                          <p class="text-nowrap text-decoration-line-through fw-lighter">150.00 DT</p>
-                        </div>
-                        <div class="col-6  text-start" style="margin-right: -0.5rem;">
-                          <p class=" text-nowrap fw-bolder " style="color:hsl(51, 91%, 60%);">140.00 DT</p>
-                        </div>
-                      </div>
-
-                      <div class=" d-flex justify-content-center">
-                        <button class="button-86" role="button">Details</button>
-                      </div>
-
-                    </div>
-                  </div>
-                </div>
-              </div><!-- Menu Item -->
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </div>
-
   </div>
-
-
-
-
-
 </section>
-
-
 <section>
   <div class="container-fluid  mt-5 ">
     <div class="row g-0 justify-content-center ">
@@ -336,12 +275,10 @@ $products5 = mysqli_query($connection, $query);
 
 
               <?php while ($product = mysqli_fetch_assoc($products4)) : ?>
-                <!-- get category title of each post from categories table -->
-
                 <div class="col-lg-3 col-md-4  p-4">
                   <div class="col menu-item">
                     <div class="card border-0 text-center">
-                      <div class="card-body position-relative p-4">
+                      <div class="card-body ">
                         <?php if ($product['new'] && $product['promo'] == 0) : ?>
                           <div class=" notify-badge rounded-circle d-flex align-items-center justify-content-center vh-100 top-0 end-0">
                             <span class="badge  badge-secondary " style="font-size: 0.9rem;">New</span>
@@ -360,25 +297,25 @@ $products5 = mysqli_query($connection, $query);
 
                         <div class="card-image">
 
-                          <img style="height : 17rem;" src="<?= ROOT_URL ?>images/<?= $product['thumbnail'] ?>" class="menu-img " width="0">
+                          <img src="<?= ROOT_URL ?>images/<?= $product['thumbnail'] ?>" class="menu-img prod_img" width="0">
 
                         </div>
 
                         <div class="card-inner prod__desc">
-                          <p style="height:1rem;margin-top:0.5rem;" class="fw-bolder  text-truncate "><?= $product['title'] ?></h4>
+                          <p class="fw-bolder  text-truncate prod_title"><?= $product['title'] ?></h4>
 
                           <div class="row align-items-center">
                             <div class="col-6   text-end ">
 
                               <p class="text-nowrap text-decoration-line-through fw-lighter"><?= $product['prix_org'] ?> DT</p>
                             </div>
-                            <div class="col-6  text-start" style="margin-right: -0.5rem;">
+                            <div class="col-6  text-start prod_prix_aft">
                               <p class=" text-nowrap fw-bolder " style="color:hsl(51, 91%, 60%);"><?= $product['prix_aft'] ?> DT</p>
                             </div>
                           </div>
 
                           <div class=" d-flex justify-content-center">
-                            <a href="<?= ROOT_URL ?>/producttest.php?id=<?= $product['id'] ?>">
+                            <a href="<?= ROOT_URL ?>/producttest.php?id=<?= $product['id'] ?>&cat_id=<?= $product['category_id'] ?>">
                               <button class="button-86" role="button">Buy</button>
                             </a>
                           </div>
@@ -406,8 +343,6 @@ $products5 = mysqli_query($connection, $query);
 
 
               <?php while ($product = mysqli_fetch_assoc($products5)) : ?>
-                <!-- get category title of each post from categories table -->
-
                 <div class="col-lg-3 col-md-4  p-4">
                   <div class="col menu-item">
                     <div class="card border-0 text-center">
@@ -430,25 +365,25 @@ $products5 = mysqli_query($connection, $query);
 
                         <div class="card-image">
 
-                          <img style="height : 17rem;" src="<?= ROOT_URL ?>images/<?= $product['thumbnail'] ?>" class="menu-img " width="0">
+                          <img src="<?= ROOT_URL ?>images/<?= $product['thumbnail'] ?>" class="menu-img prod_img" width="0">
 
                         </div>
 
                         <div class="card-inner prod__desc">
-                          <p style="height:1rem;margin-top:0.5rem;" class="fw-bolder  text-truncate "><?= $product['title'] ?></h4>
+                          <p class="fw-bolder  text-truncate prod_title"><?= $product['title'] ?></h4>
 
                           <div class="row align-items-center">
                             <div class="col-6   text-end ">
 
                               <p class="text-nowrap text-decoration-line-through fw-lighter"><?= $product['prix_org'] ?> DT</p>
                             </div>
-                            <div class="col-6  text-start" style="margin-right: -0.5rem;">
+                            <div class="col-6  text-start prod_prix_aft">
                               <p class=" text-nowrap fw-bolder " style="color:hsl(51, 91%, 60%);"><?= $product['prix_aft'] ?> DT</p>
                             </div>
                           </div>
 
                           <div class=" d-flex justify-content-center">
-                            <a href="<?= ROOT_URL ?>/producttest.php?id=<?= $product['id'] ?>">
+                            <a href="<?= ROOT_URL ?>/producttest.php?id=<?= $product['id'] ?>&cat_id=<?= $product['category_id'] ?>">
                               <button class="button-86" role="button">Buy</button>
                             </a>
                           </div>
@@ -478,44 +413,47 @@ $products5 = mysqli_query($connection, $query);
 
 
               <?php while ($product = mysqli_fetch_assoc($products3)) : ?>
-                <!-- get category title of each post from categories table -->
-
                 <div class="col-lg-3 col-md-4  p-4">
                   <div class="col menu-item">
                     <div class="card border-0 text-center">
                       <div class="card-body ">
-                        <?php if ($product['new']) : ?>
-                          <div class="notify-badge rounded-circle d-flex align-items-center justify-content-center vh-100 top-0 end-0" style="margin-top:4rem;">
-                            <span class="badge badge-secondary " style="font-size: 0.9rem;">New</span>
+                        <?php if ($product['new'] && $product['promo'] == 0) : ?>
+                          <div class=" notify-badge rounded-circle d-flex align-items-center justify-content-center vh-100 top-0 end-0">
+                            <span class="badge  badge-secondary " style="font-size: 0.9rem;">New</span>
+                          </div>
+                        <?php endif ?>
+                        <?php if ($product['new'] && $product['promo'] != 0) : ?>
+                          <div class=" notify-badge rounded-circle d-flex align-items-center justify-content-center vh-100 top-0 end-0 " style="margin-top: 3.5rem;">
+                            <span class="badge  badge-secondary " style="font-size: 0.9rem;">New</span>
                           </div>
                         <?php endif ?>
                         <?php if ($product['promo'] != 0) : ?>
-                          <div class="notify-badge rounded-circle d-flex align-items-center justify-content-center vh-100 top-0 end-0">
+                          <div class="notify-badge  rounded-circle d-flex align-items-center justify-content-center vh-100 top-0 end-0 ">
                             <span class="badge badge-secondary " style="font-size: 0.9rem;">-<?= $product['promo'] ?>%</span>
                           </div>
                         <?php endif ?>
 
                         <div class="card-image">
 
-                          <img style="height : 17rem;" src="<?= ROOT_URL ?>images/<?= $product['thumbnail'] ?>" class="menu-img " width="0">
+                          <img src="<?= ROOT_URL ?>images/<?= $product['thumbnail'] ?>" class="menu-img prod_img" width="0">
 
                         </div>
 
                         <div class="card-inner prod__desc">
-                          <p style="height:1rem;margin-top:0.5rem;" class="fw-bolder  text-truncate "><?= $product['title'] ?></h4>
+                          <p class="fw-bolder  text-truncate prod_title"><?= $product['title'] ?></h4>
 
                           <div class="row align-items-center">
                             <div class="col-6   text-end ">
 
                               <p class="text-nowrap text-decoration-line-through fw-lighter"><?= $product['prix_org'] ?> DT</p>
                             </div>
-                            <div class="col-6  text-start" style="margin-right: -0.5rem;">
+                            <div class="col-6  text-start prod_prix_aft">
                               <p class=" text-nowrap fw-bolder " style="color:hsl(51, 91%, 60%);"><?= $product['prix_aft'] ?> DT</p>
                             </div>
                           </div>
 
                           <div class=" d-flex justify-content-center">
-                            <a href="<?= ROOT_URL ?>/producttest.php?id=<?= $product['id'] ?>">
+                            <a href="<?= ROOT_URL ?>/producttest.php?id=<?= $product['id'] ?>&cat_id=<?= $product['category_id'] ?>">
                               <button class="button-86" role="button">Buy</button>
                             </a>
                           </div>
@@ -645,7 +583,22 @@ $products5 = mysqli_query($connection, $query);
         }
       });
     }
-
+    $(document).on('click', '.link-next', function(event) {
+      event.preventDefault();
+      page = (page + 1) % 4;
+      if (page == 0) {
+        page = 1;
+      }
+      load_data(page); // load data for clicked page
+    });
+    $(document).on('click', '.link-prev', function(event) {
+      event.preventDefault();
+      page = page - 1;
+      if (page == 0) {
+        page = 3;
+      }
+      load_data(page); // load data for clicked page
+    });
     $(document).on('click', '.pagination-link', function(event) {
       event.preventDefault();
       page = $(this).data('page-number');
