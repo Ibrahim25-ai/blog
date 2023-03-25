@@ -3,7 +3,7 @@ include 'partials/header.php';
 
 // fetch current user's posts from database
 $current_user_id = $_SESSION['user-id'];
-$query = "SELECT id, title, category_id FROM products WHERE author_id=$current_user_id ORDER BY id DESC";
+$query = "SELECT id, title,thumbnail, category_id FROM products WHERE author_id=$current_user_id ORDER BY id DESC";
 $products = mysqli_query($connection, $query);
 ?>
 
@@ -93,13 +93,14 @@ $products = mysqli_query($connection, $query);
             </ul>
         </aside>
         <main>
-            <h2>Manage Users</h2>
+            <h2>Manage Products</h2>
             <?php if (mysqli_num_rows($products) > 0) : ?>
-                <table>
+                <table class="table table-striped">
                     <thead>
                         <tr>
                             <th>Title</th>
                             <th>Category</th>
+                            <th>Image</th>
                             <th>Edit</th>
                             <th>Delete</th>
                         </tr>
@@ -116,8 +117,9 @@ $products = mysqli_query($connection, $query);
                             <tr>
                                 <td><?= $product['title'] ?></td>
                                 <td><?= $category['title'] ?></td>
+                                <td><img src="<?= ROOT_URL ?>images/<?= $product['thumbnail'] ?>" class="menu-img prod_img" width="0"></td>
                                 <td><a href="<?= ROOT_URL ?>admin/edit-product.php?id=<?= $product['id'] ?>" class="btn sm">Edit</a></td>
-                                <td><a href="<?= ROOT_URL ?>admin/delete-post.php?id=<?= $product['id'] ?>" class="btn sm danger">Delete</a></td>
+                                <td><a href="<?= ROOT_URL ?>admin/delete-product.php?id=<?= $product['id'] ?>" class="btn sm danger">Delete</a></td>
                             </tr>
                         <?php endwhile ?>
                     </tbody>

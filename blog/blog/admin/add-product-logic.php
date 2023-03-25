@@ -1,7 +1,7 @@
 <?php
 require 'config/database.php';
 
-if (isset($_POST['submit'])) {
+if (isset($_POST['submit']) && isset($_SESSION['user_is_admin'])) {
     $author_id = $_SESSION['user-id'];
     $title = filter_var($_POST['title'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 

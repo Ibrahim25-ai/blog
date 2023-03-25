@@ -105,12 +105,15 @@ $Commands = mysqli_query($connection, $query);
         <main>
             <h2>Manage Commands</h2>
             <?php if (mysqli_num_rows($Commands) > 0) : ?>
-                <table>
+                <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>Title</th>
+                            <th>Name</th>
                             <th>Tel</th>
-                            <th>Edit</th>
+                            <th>Adr</th>
+                            <th>Product</th>
+                            <th>image</th>
+                            <th>Prix</th>
                             <th>Delete</th>
                         </tr>
                     </thead>
@@ -119,7 +122,17 @@ $Commands = mysqli_query($connection, $query);
                             <tr>
                                 <td><?= $Commande['name'] ?></td>
                                 <td><?= $Commande['tel'] ?></td>
-                                <td><a href="<?= ROOT_URL ?>admin/edit-command.php?id=<?= $Commande['id'] ?>" class="btn sm">Edit</a></td>
+                                <td><?= $Commande['adresse'] ?></td>
+                                <?php
+                                $a = $Commande['product_id'];
+                                $query = "SELECT * FROM products where id = $a";
+                                $products = mysqli_query($connection, $query);
+                                ?>
+                                <?php while ($product = mysqli_fetch_assoc($products)) : ?>
+                                <td><?= $product['title'] ?></td>
+                                <td><img src="<?= ROOT_URL ?>images/<?= $product['thumbnail'] ?>" class="menu-img prod_img" width="0"></td>
+                                <td><?= $product['prix_aft'] ?></td>
+                                <?php endwhile ?>
                                 <td><a href="<?= ROOT_URL ?>admin/delete-command.php?id=<?= $Commande['id'] ?>" class="btn sm danger">Delete</a></td>
                             </tr>
                         <?php endwhile ?>

@@ -18,9 +18,9 @@ $products3 = mysqli_query($connection, $query);
 
 $query = "SELECT * FROM products ORDER BY promo DESC LIMIT 1,12";
 $products2 = mysqli_query($connection, $query);
-$query = "SELECT * FROM products WHERE category_id=2";
+$query = "SELECT * FROM products WHERE category_id=2 LIMIT 1,12";
 $products4 = mysqli_query($connection, $query);
-$query = "SELECT * FROM products WHERE pack_id=6";
+$query = "SELECT * FROM products WHERE pack_id=6 LIMIT 1,12";
 $products5 = mysqli_query($connection, $query);
 
 ?>

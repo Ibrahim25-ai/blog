@@ -1,7 +1,7 @@
 <?php
 require 'config/database.php';
 
-if (isset($_GET['id'])) {
+if (isset($_GET['id']) && isset($_SESSION['user_is_admin'])) {
     $id = filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT);
 
     // FOR LATER
