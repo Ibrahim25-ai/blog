@@ -119,6 +119,7 @@ $Commands = mysqli_query($connection, $query);
                             <tr>
                                 <td><?= $Commande['name'] ?></td>
                                 <td><?= $Commande['tel'] ?></td>
+                                
                                 <td><a href="<?= ROOT_URL ?>admin/edit-command.php?id=<?= $Commande['id'] ?>" class="btn sm">Edit</a></td>
                                 <td><a href="<?= ROOT_URL ?>admin/delete-command.php?id=<?= $Commande['id'] ?>" class="btn sm danger">Delete</a></td>
                             </tr>

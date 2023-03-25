@@ -2,7 +2,7 @@
 require 'config/database.php';
 
 // make sure edit product button was clicked
-if (isset($_POST['submit'])) {
+if (isset($_POST['submit']) && isset($_SESSION['user_is_admin'])) {
     $id = filter_var($_POST['id'], FILTER_SANITIZE_NUMBER_INT);
     $previous_thumbnail_name = filter_var($_POST['previous_thumbnail_name'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $title = filter_var($_POST['title'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
