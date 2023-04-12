@@ -259,9 +259,9 @@ section .section-title {
     max-width: 260px;
   }
   .prod_img{
-    height : 17rem;
+    height : 13rem;
     object-fit:contain;
-    aspect-ratio: 3/2;
+    aspect-ratio: 4/2;
   }
   .prod_font{
     font-size: 0.9rem;
@@ -286,10 +286,49 @@ section .section-title {
   .badge-secondary{
     font-size: 0.9rem;
   }
+
+  .slogan {
+    margin-top: -0.5rem;
+    display: block;
+    font-size: 0.8rem;
+    color: gray;
+    
+  }
+  
+  
   @media screen and (max-width:600px) {
   
     .navig {
       margin-right: 5rem;
     }
   }
- 
+  @media screen and (max-width: 768px) {
+    .nav__items,
+    aside {
+      position: fixed;
+      top: 0;
+      
+      width: 50%;
+      height: 100%;
+  
+      overflow-y: auto;
+      transition: all 0.3s ease;
+    }
+  
+    .nav__items.show,
+    aside.show {
+      left: 0;
+    }
+  
+    .nav__item {
+     
+      display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+      text-align: center;
+      padding: 1rem 0;
+      border-bottom: 1px solid #ccc;
+      
+    }
+  }
+  

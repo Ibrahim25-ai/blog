@@ -38,6 +38,7 @@ if (isset($_GET['id'])) {
             <input type="hidden" name="id" value="<?= $product['id'] ?>">
             <input type="text" name="title" value="<?= $product['title'] ?>" placeholder="Title">
             <textarea rows="10" name="body" placeholder="Body"><?= $product['body'] ?></textarea>
+            <label>Update Category</label>
             <select name="category" value="<?= $product['category_id'] ?>">
                 <?php while ($category = mysqli_fetch_assoc($categories)) : ?>
                     <option value="<?= $category['id'] ?>"><?= $category['title'] ?></option>
@@ -53,8 +54,13 @@ if (isset($_GET['id'])) {
             </div>
             <label for="pack">Edit Pack</label>
             <select name="pack">
+            
                 <?php while ($pack = mysqli_fetch_assoc($packs)) : ?>
-                    <option value="<?= $pack['id'] ?>"><?= $pack['title'] ?></option>
+                    <?php if ($pack['id'] == $product['pack_id'] ):?>
+                    <option value="<?= $pack['id'] ?>" selected><?= $pack['title'] ?></option>
+                    <?php else :?>
+                        <option value="<?= $pack['id'] ?>"><?= $pack['title'] ?></option>
+                    <?php endif ?>
                 <?php endwhile ?>
             </select>
             <div class="form__control inline">

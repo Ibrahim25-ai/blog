@@ -111,6 +111,7 @@ $Commands = mysqli_query($connection, $query);
                             <th>Name</th>
                             <th>Tel</th>
                             <th>Adr</th>
+                            <th>Email</th>
                             <th>Product</th>
                             <th>image</th>
                             <th>Prix</th>
@@ -123,6 +124,7 @@ $Commands = mysqli_query($connection, $query);
                                 <td><?= $Commande['name'] ?></td>
                                 <td><?= $Commande['tel'] ?></td>
                                 <td><?= $Commande['adresse'] ?></td>
+                                <td><?= $Commande['email'] ?></td>
                                 <?php
                                 $a = $Commande['product_id'];
                                 $query = "SELECT * FROM products where id = $a";
