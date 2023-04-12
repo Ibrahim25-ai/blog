@@ -54,7 +54,7 @@ $products = mysqli_query($connection, $query);
         <aside>
             <ul>
                 <li>
-                    <a href="add-product.php"><i class="uil uil-pen"></i>
+                    <a href="add-product.php" ><i class="uil uil-pen "></i>
                         <h5>Add Product</h5>
                     </a>
                 </li>
@@ -72,6 +72,17 @@ $products = mysqli_query($connection, $query);
                     <li>
                         <a href="manage-users.php"><i class="uil uil-users-alt"></i>
                             <h5>Manage User</h5>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="add-pack.php"><i class="uil uil-edit"></i>
+                            <h5>Add Pack</h5>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="manage-packs.php"><i class="uil uil-list-ul"></i>
+                            <h5>Manage packs</h5>
                         </a>
                     </li>
                     <li>

@@ -326,9 +326,10 @@ nav button {
 
 .nav__items {
     display: flex;
-    align-items: center;
+    align-items: end;
     gap: 3rem;
-    margin: auto
+    margin: auto;
+    
 }
 
 .category__button {

@@ -4,6 +4,8 @@ $query = "SELECT * FROM packs";
 $packs = mysqli_query($connection, $query);
 $query = "SELECT * FROM products ORDER BY promo DESC Limit 0,4";
 $products2 = mysqli_query($connection, $query);
+$query = "SELECT * FROM categories";
+$categories = mysqli_query($connection, $query);
 // fetch current user from database
 if (isset($_SESSION['user-id'])) {
     $id = filter_var($_SESSION['user-id'], FILTER_SANITIZE_NUMBER_INT);
@@ -40,16 +42,22 @@ if (isset($_SESSION['user-id'])) {
 
 <body>
 
-    <nav class=" nav megamenu nav__container">
+    <nav class=" nav megamenu nav__container navbar-expand-lg">
 
         <div class=" container-fluid nav__container ">
+            <button id="open__nav-btn"><i class="uil uil-bars"></i></button>
+            <button id="close__nav-btn"><i class="uil uil-multiply"></i></button>
+            <img class="logo__img " src="<?= ROOT_URL ?>images/mass.png">
+            <div class="nav__text">
+                <a href="blog.php" class="nav__logo fw-bold fs-4">MASS<span style="color:hsl(51, 91%, 60%);">&</span>MUSCLE<span class="fs-4" style="color:hsl(51, 91%, 60%);">.</span></a>
+                <span class="slogan">The access of healthynutrition</span>
+            </div>
 
-            <img class="logo__img" src="<?= ROOT_URL ?>images/mass.png">
 
-            <a href="blog.php" class="nav__logo fw-bold fs-4">MASS<span style="color:hsl(51, 91%, 60%);">&</span>MUSCLE<span class="fs-4" style="color:hsl(51, 91%, 60%);">.</span></a>
+
             <ul class="nav__items">
-                <ul class="megamenu-nav d-flex justify-content-center " role="menu">
-                    <li class="nav-item is-parent">
+                <ul class="megamenu-nav d-flex justify-content-center" role="menu">
+                    <li class="nav-item d-none d-lg-block is-parent">
                         <a class="nav-link" href="<?= ROOT_URL ?>blog.php" id="megamenu-dropdown-1" aria-haspopup="true" aria-expanded="false">
                             NOS PACKS<i class="fa fa-angle-down"></i>
                         </a>
@@ -63,9 +71,11 @@ if (isset($_SESSION['user-id'])) {
                                                 <hr>
                                                 <ul class="subnav">
                                                     <?php while ($pack = mysqli_fetch_assoc($packs)) : ?>
+                                                        <?php if($pack['id'] != 12) : ?>
                                                         <li class="subnav-item">
                                                             <a href="<?= ROOT_URL ?>/index.php?id=<?= $pack['id'] ?>" class="subnav-link">> <?= $pack['title'] ?></a>
                                                         </li>
+                                                        <?php endif ?>
                                                     <?php endwhile ?>
                                                 </ul>
                                             </div>
@@ -89,7 +99,7 @@ if (isset($_SESSION['user-id'])) {
                             </div>
                         </div>
                     </li>
-                    <li class="nav-item is-parent">
+                    <li class="nav-item d-none d-lg-block is-parent">
                         <a class="nav-link" href="<?= ROOT_URL ?>about.php" id="megamenu-dropdown-2" aria-haspopup="true" aria-expanded="false">
                             NUTRITION SPORTIVE<i class="fa fa-angle-down"></i>
                         </a>
@@ -235,7 +245,7 @@ if (isset($_SESSION['user-id'])) {
                             </div>
                         </div>
                     </li>
-                    <li class="nav-item is-parent">
+                    <li class="nav-item d-none d-lg-block is-parent">
                         <a class="nav-link" href="<?= ROOT_URL ?>services.php" id="megamenu-dropdown-3" aria-haspopup="true" aria-expanded="true">
                             PROMOTIONS<span class="position top-0 start-100 text-align-center  badge rounded-pill bg-warning">
                                 Promo</span>
@@ -310,15 +320,33 @@ if (isset($_SESSION['user-id'])) {
                             </div>
                         </div>
                     </li>
+
+                    <li class="nav-item d-none d-lg-block">
+                        <a class="nav-link text-black" href="<?= ROOT_URL ?>contact.php" aria-haspopup="true" aria-expanded="false">
+                            CONTACT <i class="fa fa-angle-down"></i>
+                        </a>
+                    </li>
+
+                   
+
+
                 </ul>
-                <li class="nav-item is-parent">
-                    <a class="nav-link text-black" href="<?= ROOT_URL ?>contact.php" aria-haspopup="true" aria-expanded="false">
-                        CONTACT <i class="fa fa-angle-down"></i>
-                    </a>
-                </li>
-            </ul>
-            <div class="megamenu-background" id="megamenu-background"></div>
+                <li class="nav-item d-lg-none">
+                                <a class="nav-link" href="#">Home</a>
+                            </li>
+                <?php if (mysqli_num_rows($products2) > 0) : ?>
+                        <?php while ($categ = mysqli_fetch_assoc($categories)) : ?>
+                            
+                            <li class="nav-item  d-lg-none">
+                                <a class="nav-link " href="#"><?= $categ['title'] ?></a>
+                            </li>
+                        <?php endwhile ?>
+                    <?php else : ?>
+                        <div class="alert__message error"><?= "No categories found" ?></div>
+                    <?php endif ?>
+                <div class="megamenu-background" id="megamenu-background"></div>
         </div>
+
     </nav>
     <div class="megamenu-dim" id="megamenu-dim"></div>
     <!--====================== END OF NAV ====================-->

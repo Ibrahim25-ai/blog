@@ -4,7 +4,8 @@ const closeNavBtn = document.querySelector('#close__nav-btn');
 
 // opens nav dropdown
 const openNav = () => {
-    navItems.style.display = 'flex';
+  
+    navItems.style.display = 'inline-block';
     openNavBtn.style.display = 'none';
     closeNavBtn.style.display = 'inline-block';
 }

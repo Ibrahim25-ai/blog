@@ -2,8 +2,8 @@
 include 'partials/header.php';
 
 // fetch categories from database
-$query = "SELECT * FROM categories ORDER BY title";
-$categories = mysqli_query($connection, $query);
+$query = "SELECT * FROM packs ORDER BY title";
+$packs = mysqli_query($connection, $query);
 ?>
 
 
@@ -11,48 +11,48 @@ $categories = mysqli_query($connection, $query);
 
 <section class="dashboard">
 
-    <?php if (isset($_SESSION['add-category-success'])) : // shows if add category was successful
+    <?php if (isset($_SESSION['add-pack-success'])) : // shows if add pack was successful
     ?>
         <div class="alert__message success container">
             <p>
-                <?= $_SESSION['add-category-success'];
-                unset($_SESSION['add-category-success']);
+                <?= $_SESSION['add-pack-success'];
+                unset($_SESSION['add-pack-success']);
                 ?>
             </p>
         </div>
-    <?php elseif (isset($_SESSION['add-category'])) : // shows if add category was NOT successful
+    <?php elseif (isset($_SESSION['add-pack'])) : // shows if add pack was NOT successful
     ?>
         <div class="alert__message error container">
             <p>
-                <?= $_SESSION['add-category'];
-                unset($_SESSION['add-category']);
+                <?= $_SESSION['add-pack'];
+                unset($_SESSION['add-pack']);
                 ?>
             </p>
         </div>
-    <?php elseif (isset($_SESSION['edit-category'])) : // shows if edit category was NOT successful
+    <?php elseif (isset($_SESSION['edit-pack'])) : // shows if edit pack was NOT successful
     ?>
         <div class="alert__message error container">
             <p>
-                <?= $_SESSION['edit-category'];
-                unset($_SESSION['edit-category']);
+                <?= $_SESSION['edit-pack'];
+                unset($_SESSION['edit-pack']);
                 ?>
             </p>
         </div>
-    <?php elseif (isset($_SESSION['edit-category-success'])) : // shows if edit category was successful
+    <?php elseif (isset($_SESSION['edit-pack-success'])) : // shows if edit pack was successful
     ?>
         <div class="alert__message success container">
             <p>
-                <?= $_SESSION['edit-category-success'];
-                unset($_SESSION['edit-category-success']);
+                <?= $_SESSION['edit-pack-success'];
+                unset($_SESSION['edit-pack-success']);
                 ?>
             </p>
         </div>
-    <?php elseif (isset($_SESSION['delete-category-success'])) : // shows if delete category was successful
+    <?php elseif (isset($_SESSION['delete-pack-success'])) : // shows if delete pack was successful
     ?>
         <div class="alert__message success container">
             <p>
-                <?= $_SESSION['delete-category-success'];
-                unset($_SESSION['delete-category-success']);
+                <?= $_SESSION['delete-pack-success'];
+                unset($_SESSION['delete-pack-success']);
                 ?>
             </p>
         </div>
@@ -62,7 +62,7 @@ $categories = mysqli_query($connection, $query);
         <button id="show__sidebar-btn" class="sidebar__toggle"><i class="uil uil-angle-right-b"></i></button>
         <button id="hide__sidebar-btn" class="sidebar__toggle"><i class="uil uil-angle-left-b"></i></button>
         <aside>
-            <ul>
+        <ul>
                 <li>
                     <a href="add-product.php"><i class="uil uil-pen"></i>
                         <h5>Add Product</h5>
@@ -109,13 +109,12 @@ $categories = mysqli_query($connection, $query);
                             <h5>Manage Commands</h5>
                         </a>
                     </li>
-
                 <?php endif ?>
             </ul>
         </aside>
         <main>
-            <h2>Manage Categories</h2>
-            <?php if (mysqli_num_rows($categories) > 0) : ?>
+            <h2>Manage Packs</h2>
+            <?php if (mysqli_num_rows($packs) > 0) : ?>
                 <table>
                     <thead>
                         <tr>
@@ -125,17 +124,17 @@ $categories = mysqli_query($connection, $query);
                         </tr>
                     </thead>
                     <tbody>
-                        <?php while ($category = mysqli_fetch_assoc($categories)) : ?>
+                        <?php while ($pack = mysqli_fetch_assoc($packs)) : ?>
                             <tr>
-                                <td><?= $category['title'] ?></td>
-                                <td><a href="<?= ROOT_URL ?>admin/edit-category.php?id=<?= $category['id'] ?>" class="btn sm">Edit</a></td>
-                                <td><a href="<?= ROOT_URL ?>admin/delete-category.php?id=<?= $category['id'] ?>" class="btn sm danger">Delete</a></td>
+                                <td><?= $pack['title'] ?></td>
+                                <td><a href="<?= ROOT_URL ?>admin/edit-pack.php?id=<?= $pack['id'] ?>" class="btn sm">Edit</a></td>
+                                <td><a href="<?= ROOT_URL ?>admin/delete-pack.php?id=<?= $pack['id'] ?>" class="btn sm danger">Delete</a></td>
                             </tr>
                         <?php endwhile ?>
                     </tbody>
                 </table>
             <?php else : ?>
-                <div class="alert__message error"><?= "No categories found" ?></div>
+                <div class="alert__message error"><?= "No packs found" ?></div>
             <?php endif ?>
         </main>
     </div>
