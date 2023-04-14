@@ -1,11 +1,14 @@
 <?php
 require 'config/database.php';
+
 $query = "SELECT * FROM packs";
 $packs = mysqli_query($connection, $query);
 $query = "SELECT * FROM products ORDER BY promo DESC Limit 0,4";
 $products2 = mysqli_query($connection, $query);
 $query = "SELECT * FROM categories";
 $categories = mysqli_query($connection, $query);
+$query="SELECT * From packs1";
+$packs1=mysqli_query($connection, $query);
 // fetch current user from database
 if (isset($_SESSION['user-id'])) {
     $id = filter_var($_SESSION['user-id'], FILTER_SANITIZE_NUMBER_INT);
@@ -332,13 +335,13 @@ if (isset($_SESSION['user-id'])) {
 
                 </ul>
                 <li class="nav-item d-lg-none">
-                                <a class="nav-link" href="#">Home</a>
+                                <a class="nav-link" href="blog.php">Home</a>
                             </li>
                 <?php if (mysqli_num_rows($products2) > 0) : ?>
                         <?php while ($categ = mysqli_fetch_assoc($categories)) : ?>
                             
                             <li class="nav-item  d-lg-none">
-                                <a class="nav-link " href="#"><?= $categ['title'] ?></a>
+                                <a class="nav-link " href="<?= ROOT_URL ?>/index1.php?cat=<?= $categ['title'] ?>"><?= $categ['title'] ?></a>
                             </li>
                         <?php endwhile ?>
                     <?php else : ?>

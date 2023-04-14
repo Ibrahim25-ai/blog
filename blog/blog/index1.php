@@ -1,49 +1,35 @@
-<?php
-require 'partials/header.php';
-
-if (isset($_GET['search']) && isset($_GET['submit'])) {
-    $search = filter_var($_GET['search'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-    $query = "SELECT * FROM products WHERE title LIKE '%$search%' ORDER BY date_time DESC";
-    $posts = mysqli_query($connection, $query);
+<?php 
+include 'partials/header.php';
+if (isset($_GET['id'])) {
+    $id = filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT);
+    $query = "SELECT * FROM products WHERE Category_id=$id";
+    $result = mysqli_query($connection, $query);
+    $products = mysqli_fetch_assoc($result);
+   
+  
+  
+  
+  
+  
+  
+  }
+  else {
     
-} else {
-    header('location: ' . ROOT_URL . 'blog.php');
-    die();
-}
-?>
-<?php
-// Fonction pour trouver les produits avec des titres similaires
-function trouverProduits($motEntre, $produits) {
-
-    $produitsSimilaires = array();
-    foreach ($produits as $produit) {
-        $titreProduit = $produit["titre"];
-        $lettresCommunes = array_intersect(str_split($titreProduit), str_split($motEntre));
-        if (count($lettresCommunes) >= 3) {
-            $produitsSimilaires[] = $produit;
-        }
-    }
-    return $produitsSimilaires;
-}?>
-
-
-<?php     $produits[]="SELECT * FROM products"; 
-$produitsSimilaires = trouverProduits($search, $produits);
-?>
-
-
-
+  }
+ ?>
+  <section>
 <div class="tab-content" data-aos="fade-up" data-aos-delay="300">
 
 <div class="tab-pane fade active show" id="NEWP">
   <div class="container1 text-center mt-5 mb-5">
+  <img class="nos img-fluid mx-auto d-block mt-5 mb-5 p-2" src="images/nospacks.png">
+
     <div class="row wrapper rounded fade show active">
     
-  
-      <?php if (mysqli_num_rows($posts) > 0) : ?>
+      <?php if (mysqli_num_rows($products) > 0) : ?>
 
 
-        <?php while ($product = mysqli_fetch_array($posts)) : ?>
+        <?php while ($product = mysqli_fetch_array($products)) : ?>
           <!-- get category title of each post from categories table -->
 
           <div class="col-lg-3 col-md-4  p-4">
@@ -100,33 +86,16 @@ $produitsSimilaires = trouverProduits($search, $produits);
       <?php else : ?>
         <div class="alert__message error"><?= "No products found" ?></div>
       <?php endif ?>
-      <div class="col-lg-3 col-md-4  p-4">
-        <!-- Menu Item -->
+      
+      
       </div>
 
     </div>
   </div>
 </div>
 </div>
-            
-<!--====================== END OF POSTS ====================-->
-
-
-
-<section class="category__buttons">
-    <div class="container category__buttons-container">
-        <?php
-        $all_categories_query = "SELECT * FROM categories";
-        $all_categories = mysqli_query($connection, $all_categories_query);
-        ?>
-        <?php while ($category = mysqli_fetch_assoc($all_categories)) : ?>
-            <a href="<?= ROOT_URL ?>category-posts.php?id=<?= $category['id'] ?>" class="category__button"><?= $category['title'] ?></a>
-        <?php endwhile ?>
-    </div>
 </section>
-<!--====================== END OF CATEGORY BUTTONS ====================-->
+<?php
+include 'partials/footer.php';
 
-
-
-
-<?php include 'partials/footer.php' ?>
+?>
