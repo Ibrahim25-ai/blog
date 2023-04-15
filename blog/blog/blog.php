@@ -484,7 +484,7 @@ $products5 = mysqli_query($connection, $query);
 
     <div class="section-header  text-center " style="margin-top: 2rem;">
 
-      <p class="fw-bolder fs-2 text-black" style="margin-top:2rem;">CHECK OUR BRANDS</p>
+      <p class="fw-bolder fs-2 text-black" style="margin-top:2rem;">CHECK OUR SERVICES</p>
     </div>
 
     <div class="row justify-content-center ">
@@ -552,7 +552,7 @@ $products5 = mysqli_query($connection, $query);
   <div class="container-fluid">
     <div class="section-header  text-center ">
 
-      <p class="fw-bolder fs-2 text-black">OUR SPONSORS</p>
+      <p class="fw-bolder fs-2 text-black">OUR BRANDS</p>
     </div>
     <div class="row spo_img justify-content-center align-items-center text-center p-5">
       <div class="col-lg-2 col-md-4"><img src="<?= ROOT_URL ?>images/logo1.png"></div>
