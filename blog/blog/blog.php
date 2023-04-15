@@ -111,7 +111,7 @@ $products5 = mysqli_query($connection, $query);
           <div class="row wrapper rounded fade show active">
             <?php if (mysqli_num_rows($products2) > 0) : ?>
               <?php while ($product = mysqli_fetch_assoc($products2)) : ?>
-                <div class="col-lg-3 col-md-4  p-4">
+                <div class="col-lg-3 col-md-4 col-sm-6 p-4">
                   <div class="col menu-item">
                     <div class="card border-0 text-center">
                       <div class="card-body ">
@@ -175,7 +175,7 @@ $products5 = mysqli_query($connection, $query);
           <div class="row wrapper rounded fade show active">
             <?php if (mysqli_num_rows($products3) > 0) : ?>
               <?php while ($product = mysqli_fetch_assoc($products3)) : ?>
-                <div class="col-lg-3 col-md-4  p-4">
+                <div class="col-lg-3 col-md-4 col-sm-6 p-4">
                   <div class="col menu-item">
                     <div class="card border-0 text-center">
                       <div class="card-body ">
@@ -275,7 +275,7 @@ $products5 = mysqli_query($connection, $query);
 
 
               <?php while ($product = mysqli_fetch_assoc($products4)) : ?>
-                <div class="col-lg-3 col-md-4  p-4">
+                <div class="col-lg-3 col-md-4 col-sm-6 p-4">
                   <div class="col menu-item">
                     <div class="card border-0 text-center">
                       <div class="card-body ">
@@ -343,7 +343,7 @@ $products5 = mysqli_query($connection, $query);
 
 
               <?php while ($product = mysqli_fetch_assoc($products5)) : ?>
-                <div class="col-lg-3 col-md-4  p-4">
+                <div class="col-lg-3 col-md-4 col-sm-6 p-4">
                   <div class="col menu-item">
                     <div class="card border-0 text-center">
                       <div class="card-body ">
@@ -413,7 +413,7 @@ $products5 = mysqli_query($connection, $query);
 
 
               <?php while ($product = mysqli_fetch_assoc($products3)) : ?>
-                <div class="col-lg-3 col-md-4  p-4">
+                <div class="col-lg-3 col-md-4 col-sm-6 p-4">
                   <div class="col menu-item">
                     <div class="card border-0 text-center">
                       <div class="card-body ">
@@ -484,7 +484,7 @@ $products5 = mysqli_query($connection, $query);
 
     <div class="section-header  text-center " style="margin-top: 2rem;">
 
-      <p class="fw-bolder fs-2 text-black" style="margin-top:2rem;">CHECK OUR SERVICES</p>
+      <p class="fw-bolder fs-2 text-black" style="margin-top:2rem;">CHECK OUR BRANDS</p>
     </div>
 
     <div class="row justify-content-center ">
@@ -552,7 +552,7 @@ $products5 = mysqli_query($connection, $query);
   <div class="container-fluid">
     <div class="section-header  text-center ">
 
-      <p class="fw-bolder fs-2 text-black">OUR BRANDS</p>
+      <p class="fw-bolder fs-2 text-black">OUR SPONSORS</p>
     </div>
     <div class="row spo_img justify-content-center align-items-center text-center p-5">
       <div class="col-lg-2 col-md-4"><img src="<?= ROOT_URL ?>images/logo1.png"></div>

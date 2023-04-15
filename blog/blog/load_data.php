@@ -23,7 +23,7 @@ $result = mysqli_query($connection, $sqlQuery);
               
       $paginationHtml.='
       
-      <div class="col-lg-3 col-md-4  p-4">
+      <div class="col-lg-3 col-md-4 col-6 p-4">
                   <div class="col menu-item">
                     <div class="card border-0 text-center"><div class="card-body position-relative p-4">
                     ';

@@ -7,8 +7,7 @@ $query = "SELECT * FROM products ORDER BY promo DESC Limit 0,4";
 $products2 = mysqli_query($connection, $query);
 $query = "SELECT * FROM categories";
 $categories = mysqli_query($connection, $query);
-$query="SELECT * From packs1";
-$packs1=mysqli_query($connection, $query);
+
 // fetch current user from database
 if (isset($_SESSION['user-id'])) {
     $id = filter_var($_SESSION['user-id'], FILTER_SANITIZE_NUMBER_INT);
@@ -53,7 +52,7 @@ if (isset($_SESSION['user-id'])) {
             <img class="logo__img " src="<?= ROOT_URL ?>images/mass.png">
             <div class="nav__text">
                 <a href="blog.php" class="nav__logo fw-bold fs-4">MASS<span style="color:hsl(51, 91%, 60%);">&</span>MUSCLE<span class="fs-4" style="color:hsl(51, 91%, 60%);">.</span></a>
-                <span class="slogan">The access of healthynutrition</span>
+                <span class="slogan text-nowrap ">The access of healthynutrition</span>
             </div>
 
 
@@ -341,7 +340,7 @@ if (isset($_SESSION['user-id'])) {
                         <?php while ($categ = mysqli_fetch_assoc($categories)) : ?>
                             
                             <li class="nav-item  d-lg-none">
-                                <a class="nav-link " href="<?= ROOT_URL ?>/index1.php?cat=<?= $categ['title'] ?>"><?= $categ['title'] ?></a>
+                                <a class="nav-link " href="<?= ROOT_URL ?>/index1.php?cat=<?= $categ['id'] ?>"><?= $categ['title'] ?></a>
                             </li>
                         <?php endwhile ?>
                     <?php else : ?>
