@@ -8,7 +8,7 @@
       <a
         class="btn text-white btn-floating m-1"
         style="background-color: #3b5998;"
-        href="#!"
+        href="https://www.facebook.com/profile.php?id=100078256651030"
         role="button"
         ><i class="fab fa-facebook-f"></i
       ></a>
@@ -35,7 +35,7 @@
       <a
         class="btn text-white btn-floating m-1"
         style="background-color: #ac2bac;"
-        href="#!"
+        href="https://www.instagram.com/mass_and_muscle/"
         role="button"
         ><i class="fab fa-instagram"></i
       ></a>
@@ -105,7 +105,7 @@
         </article>
     </div>
     <div class="footer__copyright">
-        <small>Copyright &copy; 2022 zied wadhah</small>
+        <small>Copyright &copy; 2023 </small>
     </div>
 </footer>
 <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>

@@ -102,7 +102,7 @@ if (isset($_SESSION['user-id'])) {
                         </div>
                     </li>
                     <li class="nav-item d-none d-lg-block is-parent">
-                        <a class="nav-link" href="<?= ROOT_URL ?>about.php" id="megamenu-dropdown-2" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link" href="<?= ROOT_URL ?>blog.php" id="megamenu-dropdown-2" aria-haspopup="true" aria-expanded="false">
                             NUTRITION SPORTIVE<i class="fa fa-angle-down"></i>
                         </a>
                         <div class="megamenu-content" aria-labelledby="megamenu-dropdown-2">
@@ -248,7 +248,7 @@ if (isset($_SESSION['user-id'])) {
                         </div>
                     </li>
                     <li class="nav-item d-none d-lg-block is-parent">
-                        <a class="nav-link" href="<?= ROOT_URL ?>services.php" id="megamenu-dropdown-3" aria-haspopup="true" aria-expanded="true">
+                        <a class="nav-link" href="<?= ROOT_URL ?>blog.php" id="megamenu-dropdown-3" aria-haspopup="true" aria-expanded="true">
                             PROMOTIONS<span class="position top-0 start-100 text-align-center  badge rounded-pill bg-warning">
                                 Promo</span>
                             <i class="fa fa-angle-down"></i>

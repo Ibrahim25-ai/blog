@@ -9,7 +9,7 @@ if (isset($_POST['page'])) {
 
 $perPage = 5;
 $startFrom = ($page - 1) * $perPage ;
-$sqlQuery = "SELECT * FROM products ORDER BY id ASC LIMIT $startFrom, $perPage";
+$sqlQuery = "SELECT * FROM products WHERE new=1 LIMIT $startFrom, $perPage";
 $result = mysqli_query($connection, $sqlQuery);
 
     $paginationHtml = '';
