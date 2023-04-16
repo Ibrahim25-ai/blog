@@ -108,24 +108,6 @@ $products5 = mysqli_query($connection, $query);
     <div class="tab-content" data-aos="fade-up" data-aos-delay="300">
       <div class="tab-pane fade  " id="TOPROM">
         <div class="container1 text-center mt-5 mb-5 ">
-        <nav>
-
-            <ul class="pagination navig justify-content-end ">
-              <li class="page-item ">
-                <a class="page-link link-prev text-dark" href="#">Previous</a>
-              </li>
-              <?php for ($i = 1; $i <= $totalPages; $i++) : ?>
-                <li class="page-item">
-                  <a href="#" class="page-link pagination-link text-dark" data-page-number="<?= $i ?>"><?= $i ?></a>
-                </li>
-              <?php endfor ?>
-              <li class="page-item">
-                <a class="page-link link-next text-dark" href="#">Next</a>
-              </li>
-            </ul>
-        </nav>
-          <div id="product-list" class="row wrapper rounded fade show active">
-          </div>
           <div class="row wrapper rounded fade show active">
             <?php if (mysqli_num_rows($products2) > 0) : ?>
               <?php while ($product = mysqli_fetch_assoc($products2)) : ?>
@@ -190,21 +172,7 @@ $products5 = mysqli_query($connection, $query);
     <div class="tab-content" data-aos="fade-up" data-aos-delay="300">
       <div class="tab-pane fade " id="TEST">
         <div class="container1 text-center mt-5 mb-5">
-        <nav>
-            <ul class="pagination navig justify-content-end ">
-              <li class="page-item ">
-                <a class="page-link link-prev text-dark" href="#">Previous</a>
-              </li>
-              <?php for ($i = 1; $i <= $totalPages; $i++) : ?>
-                <li class="page-item">
-                  <a href="#" class="page-link pagination-link text-dark" data-page-number="<?= $i ?>"><?= $i ?></a>
-                </li>
-              <?php endfor ?>
-              <li class="page-item">
-                <a class="page-link link-next text-dark" href="#">Next</a>
-              </li>
-            </ul>
-          </nav>
+      
           <div class="row wrapper rounded fade show active">
             <?php if (mysqli_num_rows($products3) > 0) : ?>
               <?php while ($product = mysqli_fetch_assoc($products3)) : ?>
