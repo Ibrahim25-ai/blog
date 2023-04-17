@@ -20,6 +20,7 @@ unset($_SESSION['add-category-data']);
             </div>
         <?php endif ?>
         <form action="<?= ROOT_URL ?>admin/add-category-logic.php" method="POST">
+            <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
             <input type="text" value="<?= $title ?>" name="title" placeholder="Title">
             <textarea rows="4" value="<?= $description ?>" name="description" placeholder="Description"></textarea>
             <button type="submit" name="submit" class="btn">Add Category</button>

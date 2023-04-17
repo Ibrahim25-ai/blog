@@ -129,7 +129,13 @@ $categories = mysqli_query($connection, $query);
                             <tr>
                                 <td><?= $category['title'] ?></td>
                                 <td><a href="<?= ROOT_URL ?>admin/edit-category.php?id=<?= $category['id'] ?>" class="btn sm">Edit</a></td>
-                                <td><a href="<?= ROOT_URL ?>admin/delete-category.php?id=<?= $category['id'] ?>" class="btn sm danger">Delete</a></td>
+                                <td>
+                                    <form method="POST" action="<?= ROOT_URL ?>admin/delete-category.php">
+                                        <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
+                                        <input type="hidden" name="id" value="<?= $category['id'] ?>">
+                                        <button type="submit" class="btn sm danger">Delete</button>
+                                    </form>
+                                </td>
                             </tr>
                         <?php endwhile ?>
                     </tbody>

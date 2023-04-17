@@ -20,8 +20,9 @@ unset($_SESSION['add-pack-data']);
             </div>
         <?php endif ?>
         <form action="<?= ROOT_URL ?>admin/add-pack-logic.php" method="POST">
+            <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
             <input type="text" value="<?= $title ?>" name="title" placeholder="Title">
-    
+
             <button type="submit" name="submit" class="btn">Add pack</button>
         </form>
     </div>

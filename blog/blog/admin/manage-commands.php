@@ -135,7 +135,11 @@ $Commands = mysqli_query($connection, $query);
                                 <td><img src="<?= ROOT_URL ?>images/<?= $product['thumbnail'] ?>" class="menu-img prod_img" width="0"></td>
                                 <td><?= $product['prix_aft'] ?></td>
                                 <?php endwhile ?>
-                                <td><a href="<?= ROOT_URL ?>admin/delete-command.php?id=<?= $Commande['id'] ?>" class="btn sm danger">Delete</a></td>
+                                <td> <form method="POST" action="<?= ROOT_URL ?>admin/delete-command.php">
+    <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
+    <input type="hidden" name="id" value="<?= $Commande['id'] ?>">
+    <button type="submit" class="btn sm danger">Delete</button>
+</form>              </td>      
                             </tr>
                         <?php endwhile ?>
                     </tbody>

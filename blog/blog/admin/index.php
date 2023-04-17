@@ -130,8 +130,11 @@ $products = mysqli_query($connection, $query);
                                 <td><?= $category['title'] ?></td>
                                 <td><img src="<?= ROOT_URL ?>images/<?= $product['thumbnail'] ?>" class="menu-img prod_img" width="0"></td>
                                 <td><a href="<?= ROOT_URL ?>admin/edit-product.php?id=<?= $product['id'] ?>" class="btn sm">Edit</a></td>
-                                <td><a href="<?= ROOT_URL ?>admin/delete-product.php?id=<?= $product['id'] ?>" class="btn sm danger">Delete</a></td>
-                            </tr>
+                                <td> <form method="POST" action="<?= ROOT_URL ?>admin/delete-product.php">
+    <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
+    <input type="hidden" name="id" value="<?= $product['id'] ?>">
+    <button type="submit" class="btn sm danger">Delete</button>
+</form>              </td>              </tr>
                         <?php endwhile ?>
                     </tbody>
                 </table>

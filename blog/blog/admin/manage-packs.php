@@ -128,7 +128,11 @@ $packs = mysqli_query($connection, $query);
                             <tr>
                                 <td><?= $pack['title'] ?></td>
                                 <td><a href="<?= ROOT_URL ?>admin/edit-pack.php?id=<?= $pack['id'] ?>" class="btn sm">Edit</a></td>
-                                <td><a href="<?= ROOT_URL ?>admin/delete-pack.php?id=<?= $pack['id'] ?>" class="btn sm danger">Delete</a></td>
+                                <td> <form method="POST" action="<?= ROOT_URL ?>admin/delete-pack.php">
+    <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
+    <input type="hidden" name="id" value="<?= $pack['id'] ?>">
+    <button type="submit" class="btn sm danger">Delete</button>
+</form>              </td>      
                             </tr>
                         <?php endwhile ?>
                     </tbody>

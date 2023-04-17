@@ -1,7 +1,16 @@
 <?php
 require 'config/database.php';
 
+session_start();
+
 if (isset($_POST['submit'])) {
+    // Verify CSRF token
+    if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+        $_SESSION['signin'] = "Couldn't sign in. Invalid CSRF token.";
+        header('location: ' . ROOT_URL . 'signin.php');
+        die();
+    }
+
     // get form data
     $username_email = filter_var($_POST['username_email'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $password = filter_var($_POST['password'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -27,23 +36,10 @@ if (isset($_POST['submit'])) {
                 if ($user_record['is_admin'] == 1) {
                     $_SESSION['user_is_admin'] = true;
                 }
-                // log user in
-                header('location: ' . ROOT_URL . 'admin/');
-            } else {
-                $_SESSION['signin'] = "Please check your input";
             }
-        } else {
-            $_SESSION['signin'] = "User not found";
-        }
-    }
 
-    // if any problem, redirect back to signin page with login data
-    if (isset($_SESSION['signin'])) {
-        $_SESSION['signin-data'] = $_POST;
-        header('location: ' . ROOT_URL . 'signin.php');
-        die();
-    }
-} else {
-    header('location: ' . ROOT_URL . 'signin.php');
+    header('location: ' . ROOT_URL . 'admin.php');
     die();
+}
+    }
 }

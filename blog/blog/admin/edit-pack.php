@@ -21,6 +21,7 @@ if (isset($_GET['id'])) {
     <div class="container form__section-container">
         <h2>Edit Pack</h2>
         <form action="<?= ROOT_URL ?>admin/edit-pack-logic.php" method="POST">
+            <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
             <input type="hidden" name="id" value="<?= $pack['id'] ?>">
             <input type="text" name="title" value="<?= $pack['title'] ?>" placeholder="Title">
             <button type="submit" name="submit" class="btn">Update pack</button>

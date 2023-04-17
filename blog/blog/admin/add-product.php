@@ -18,7 +18,7 @@ unset($_SESSION['add-product-data']);
 
 
 
-<section >
+<section>
     <div class="container-fluid form__section-container mb-5 ">
         <h2>Add Product</h2>
         <?php if (isset($_SESSION['add-product'])) : ?>
@@ -31,11 +31,12 @@ unset($_SESSION['add-product-data']);
             </div>
         <?php endif ?>
         <form action="<?= ROOT_URL ?>admin/add-product-logic.php" enctype="multipart/form-data" method="POST">
+            <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
             <input type="text" name="title" value="<?= $title ?>" placeholder="Title">
             <textarea rows="10" name="body" placeholder="Body"><?= $body ?></textarea>
             <label for="category">Add Category</label>
             <select name="category">
-            
+
                 <?php while ($category = mysqli_fetch_assoc($categories)) : ?>
                     <option value="<?= $category['id'] ?>"><?= $category['title'] ?></option>
                 <?php endwhile ?>

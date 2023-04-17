@@ -1,9 +1,10 @@
 <?php
 require 'config/constants.php';
 
-$username_email = $_SESSION['signin-data']['username_email'] ?? null;
-$password = $_SESSION['signin-data']['password'] ?? null;
-
+$username_email = isset($_SESSION['signin-data']['username_email']) ? $_SESSION['signin-data']['username_email'] : '';
+$password = isset($_SESSION['signin-data']['password']) ? $_SESSION['signin-data']['password'] : '';
+$csrf_token = bin2hex(random_bytes(32));
+$_SESSION['csrf_token'] = $csrf_token;
 unset($_SESSION['signin-data']);
 ?>
 
@@ -49,6 +50,7 @@ unset($_SESSION['signin-data']);
                 </div>
             <?php endif ?>
             <form action="<?= ROOT_URL ?>signin-logic.php" method="POST">
+                <input type="hidden" name="csrf_token" value="<?= $csrf_token ?>">
                 <input type="text" name="username_email" value="<?= $username_email ?>" placeholder="Username or Email">
                 <input type="password" name="password" value="<?= $password ?>" placeholder="Password">
                 <button type="submit" name="submit" class="btn">Sign In</button>

@@ -1,8 +1,14 @@
 <?php
 require 'config/database.php';
 
-if (isset($_GET['id']) && isset($_SESSION['user_is_admin'])) {
-    $id = filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT);
+if (isset($_POST['id']) && isset($_SESSION['user_is_admin'])) {
+    $id = filter_var($_POST['id'], FILTER_SANITIZE_NUMBER_INT);
+  // Check CSRF token
+  if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+    $_SESSION['edit-product'] = "Couldn't update product. Invalid CSRF token.";
+    header('location: ' . ROOT_URL . 'admin/');
+    die();
+}
 
     // fetch command from database in order to delete thumbnail from images folder
     $query = "SELECT * FROM commande WHERE id=$id";

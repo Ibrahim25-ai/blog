@@ -23,30 +23,31 @@ if (isset($_GET['id'])) {
 
 
 <section>
-<?php if (isset($_SESSION['edit-product'])) : ?>
-            <div class="alert__message error">
-                <p>
-                    <?= $_SESSION['edit-product'];
-                    unset($_SESSION['edit-product']);
-                    ?>
-                </p>
-            </div>
-        <?php endif ?>
+    <?php if (isset($_SESSION['edit-product'])) : ?>
+        <div class="alert__message error">
+            <p>
+                <?= $_SESSION['edit-product'];
+                unset($_SESSION['edit-product']);
+                ?>
+            </p>
+        </div>
+    <?php endif ?>
     <div class="container-fluid form__section-container">
         <h2>Edit Product</h2>
         <form action="<?= ROOT_URL ?>admin/edit-product-logic.php" enctype="multipart/form-data" method="POST">
+            <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
             <input type="hidden" name="id" value="<?= $product['id'] ?>">
             <input type="text" name="title" value="<?= $product['title'] ?>" placeholder="Title">
             <textarea rows="10" name="body" placeholder="Body"><?= $product['body'] ?></textarea>
             <label>Update Category</label>
             <select name="category" value="<?= $product['category_id'] ?>">
                 <?php while ($category = mysqli_fetch_assoc($categories)) : ?>
-                    <?php if ($category['id'] == $product['category_id'] ):?>
+                    <?php if ($category['id'] == $product['category_id']) : ?>
                         <option value="<?= $category['id'] ?>" selected><?= $category['title'] ?></option>
-                    <?php else :?>
+                    <?php else : ?>
                         <option value="<?= $category['id'] ?>"><?= $category['title'] ?></option>
                     <?php endif ?>
-                    
+
                 <?php endwhile ?>
             </select>
             <div class="form__control">
@@ -59,11 +60,11 @@ if (isset($_GET['id'])) {
             </div>
             <label for="pack">Edit Pack</label>
             <select name="pack">
-            
+
                 <?php while ($pack = mysqli_fetch_assoc($packs)) : ?>
-                    <?php if ($pack['id'] == $product['pack_id'] ):?>
-                    <option value="<?= $pack['id'] ?>" selected><?= $pack['title'] ?></option>
-                    <?php else :?>
+                    <?php if ($pack['id'] == $product['pack_id']) : ?>
+                        <option value="<?= $pack['id'] ?>" selected><?= $pack['title'] ?></option>
+                    <?php else : ?>
                         <option value="<?= $pack['id'] ?>"><?= $pack['title'] ?></option>
                     <?php endif ?>
                 <?php endwhile ?>
