@@ -1,6 +1,7 @@
 <?php
+ob_start();
 include 'partials/header.php';
-
+ob_end_flush();
 if (isset($_GET['id'])) {
     $id = filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT);
 

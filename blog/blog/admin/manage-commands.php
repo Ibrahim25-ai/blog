@@ -1,6 +1,7 @@
 <?php
+ob_start();
 include 'partials/header.php';
-
+ob_end_flush();
 // fetch categories from database
 $query = "SELECT * FROM commande ORDER BY date_time";
 $Commands = mysqli_query($connection, $query);

@@ -1,6 +1,13 @@
 <?php
+ob_start();
 include 'partials/header.php';
-
+ob_end_flush();
+// check if the user is an admin
+if (!isset($_SESSION['user_is_admin']) || $_SESSION['user_is_admin'] !== true) {
+    // redirect the user to the homepage or show an error message
+    header('location: ' . ROOT_URL . 'blog.php');
+    
+}
 // get back form data if invalid
 $title = $_SESSION['add-pack-data']['title'] ?? null;
 

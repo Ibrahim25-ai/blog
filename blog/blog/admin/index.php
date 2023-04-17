@@ -1,6 +1,8 @@
 <?php
+ob_start();
 include 'partials/header.php';
-
+ob_end_flush();
+// check if the user is an admin
 // fetch current user's posts from database
 $current_user_id = $_SESSION['user-id'];
 $query = "SELECT id, title,thumbnail, category_id FROM products WHERE author_id=$current_user_id ORDER BY id DESC";

@@ -1,6 +1,13 @@
 <?php
+ob_start();
 include 'partials/header.php';
-
+ob_end_flush();
+// check if the user is an admin
+if (!isset($_SESSION['user_is_admin']) || $_SESSION['user_is_admin'] !== true) {
+    // redirect the user to the homepage or show an error message
+    header('Location: index.php');
+    exit;
+}
 // fetch categories from database
 $query = "SELECT * FROM categories";
 $categories = mysqli_query($connection, $query);
