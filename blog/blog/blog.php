@@ -2,8 +2,8 @@
 include 'partials/header.php';
 
 
-$perPage = 5;
-$sqlQuery = "SELECT * FROM products";
+$perPage = 12;
+$sqlQuery = "SELECT * FROM products where new = 1";
 $result = mysqli_query($connection, $sqlQuery);
 $totalRecords = mysqli_num_rows($result);
 $totalPages = ceil($totalRecords / $perPage);
@@ -13,14 +13,19 @@ $query = "SELECT * FROM products ORDER BY date_time DESC";
 $products = mysqli_query($connection, $query);
 $query = "SELECT * FROM products WHERE category_id=2 ORDER BY date_time DESC";
 $products1 = mysqli_query($connection, $query);
-$query = "SELECT * FROM products WHERE new=1 LIMIT 1,12";
-$products3 = mysqli_query($connection, $query);
 
+$query = "SELECT * FROM products  LIMIT 0,12";
+$products3 = mysqli_query($connection, $query);
+//fat burner
+$query = "SELECT * FROM products WHERE category_id=12 LIMIT 0,12";
+$products6 = mysqli_query($connection, $query);
 $query = "SELECT * FROM products ORDER BY promo DESC  ";
 $products2 = mysqli_query($connection, $query);
-$query = "SELECT * FROM products WHERE category_id=2 LIMIT 1,12";
+//protein powder 
+$query = "SELECT * FROM products WHERE category_id=7 LIMIT 0,12";
 $products4 = mysqli_query($connection, $query);
-$query = "SELECT * FROM products WHERE pack_id=6 LIMIT 1,12";
+//Mass Gainer 
+$query = "SELECT * FROM products WHERE category_id=9 LIMIT 0,12";
 $products5 = mysqli_query($connection, $query);
 
 ?>
@@ -44,7 +49,7 @@ $products5 = mysqli_query($connection, $query);
     </div>
     <div class="carousel-inner">
       <div class="carousel-item active" style="max-height :64vh;">
-        <img src="./images/1.jpg" class="d-block w-100" alt="...">
+        <img src="./images/test.jpg" class="d-block" style="height: 100%; width: 100%;object-fit:contain;"alt="...">
       </div>
       <div class="carousel-item" style="max-height :64vh;">
         <img src="./images/2.jpg" class="d-block w-100" alt="...">
@@ -62,7 +67,7 @@ $products5 = mysqli_query($connection, $query);
       <span class="visually-hidden">Next</span>
     </button>
   </div>
-</section>
+</section> 
 <section id="tabs">
   <div class="container-fluid p-5" data-aos="fade-up">
     <div class="section-header  text-center">
@@ -236,6 +241,7 @@ $products5 = mysqli_query($connection, $query);
     </div>
   </div>
 </section>
+
 <section>
   <div class="container-fluid  mt-5 ">
     <div class="row g-0 justify-content-center ">
@@ -253,13 +259,13 @@ $products5 = mysqli_query($connection, $query);
     <ul class="nav nav-tabs d-flex justify-content-center text-black mt-5" data-aos="fade-up" daqqwqwqqwta-aos-delay="200">
 
       <li class="nav-item">
-        <button class="nav-link active show" id="pills-home-b" data-bs-toggle="pill" data-bs-target="#T1" type="button" role="tab" aria-controls="pills-home" aria-selected="true">PROTEIN</button>
+        <button class="nav-link active show" id="pills-home-b" data-bs-toggle="pill" data-bs-target="#T1" type="button" role="tab" aria-controls="pills-home" aria-selected="true">PROTEIN POWDER</button>
       </li><!-- End tab nav item -->
       <li class="nav-item">
-        <button class="nav-link " id="pills-homeb" data-bs-toggle="pill" type="button" data-bs-target="#T2" role="tab" aria-controls="pills-home" aria-selected="true">PRISE DE MASSE</button>
+        <button class="nav-link " id="pills-homeb" data-bs-toggle="pill" type="button" data-bs-target="#T2" role="tab" aria-controls="pills-home" aria-selected="true">MASS GAINER</button>
       </li>
       <li class="nav-item">
-        <button class="nav-link " id="pills-hoab" data-bs-toggle="pill" data-bs-target="#T3" type="button" role="tab" aria-controls="pills-home" aria-selected="true">PERTE DE POIDS</button>
+        <button class="nav-link " id="pills-homb" data-bs-toggle="pill" type="button" data-bs-target="#T3" role="tab" aria-controls="pills-home" aria-selected="true">FAT BURNER</button>
       </li><!-- End tab nav item -->
 
       <!-- End tab nav item -->
@@ -396,7 +402,7 @@ $products5 = mysqli_query($connection, $query);
                 </div>
               <?php endwhile ?>
             <?php else : ?>
-              <div class="alert__message error"><?= "No products found" ?></div>zizou1234567
+              <div class="alert__message error"><?= "No products found" ?></div>
             <?php endif ?>
 
           </div>
@@ -405,15 +411,14 @@ $products5 = mysqli_query($connection, $query);
     </div>
 
     <div class="tab-content" data-aos="fade-up" data-aos-delay="300">
-
-      <div class="tab-pane fade " id="T3">
-        <div class="container1 text-center mt-5 mb-5">
+      <div class="tab-pane fade  " id="T3">
+        <div class="container1 text-center mt-5 mb-5 ">
           <div class="row wrapper rounded fade show active">
 
-            <?php if (mysqli_num_rows($products3) > 0) : ?>
+            <?php if (mysqli_num_rows($products6) > 0) : ?>
 
-
-              <?php while ($product = mysqli_fetch_assoc($products3)) : ?>
+               
+              <?php while ($product = mysqli_fetch_assoc($products6)) : ?>
                 <div class="col-lg-3 col-md-4 col-sm-6 p-4">
                   <div class="col menu-item">
                     <div class="card border-0 text-center">
@@ -468,6 +473,7 @@ $products5 = mysqli_query($connection, $query);
             <?php else : ?>
               <div class="alert__message error"><?= "No products found" ?></div>
             <?php endif ?>
+
           </div>
         </div>
       </div>
@@ -489,7 +495,7 @@ $products5 = mysqli_query($connection, $query);
     </div>
 
     <div class="row justify-content-center ">
-      <div class="col-lg-4  " data-aos="zoom-in" data-aos-delay="100">
+      <div class="col-lg-3  " data-aos="zoom-in" data-aos-delay="100">
         <div class="icon-box">
           <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="25" viewBox="0 0 640 512">
               <path d="M624 352h-16V243.9c0-12.7-5.1-24.9-14.1-33.9L494 110.1c-9-9-21.2-14.1-33.9-14.1H416V48c0-26.5-21.5-48-48-48H112C85.5 0 64 21.5 64 48v48H8c-4.4 0-8 3.6-8 8v16c0 4.4 3.6 8 8 8h272c4.4 0 8 3.6 8 8v16c0 4.4-3.6 8-8 8H40c-4.4 0-8 3.6-8 8v16c0 4.4 3.6 8 8 8h208c4.4 0 8 3.6 8 8v16c0 4.4-3.6 8-8 8H8c-4.4 0-8 3.6-8 8v16c0 4.4 3.6 8 8 8h208c4.4 0 8 3.6 8 8v16c0 4.4-3.6 8-8 8H64v128c0 53 43 96 96 96s96-43 96-96h128c0 53 43 96 96 96s96-43 96-96h48c8.8 0 16-7.2 16-16v-32c0-8.8-7.2-16-16-16zM160 464c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48zm320 0c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48zm80-208H416V144h44.1l99.9 99.9V256z" />
@@ -498,8 +504,14 @@ $products5 = mysqli_query($connection, $query);
           <h5>24-Hours Delivery</h5>
         </div>
       </div>
-
-      <div class="col-lg-4 " data-aos="zoom-in" data-aos-delay="200">
+      <div class="col-lg-3" data-aos="zoom-in" data-aos-delay="200">
+        <div class="icon-box">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none"  width="50" height="29" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M3 14V17C3 18.1046 3.89543 19 5 19H19C20.1046 19 21 18.1046 21 17V14H3ZM3 14V8C3 6.89543 3.89543 6 5 6H12M17 6H16V10H22V6H21M17 6V4C17 2.89543 17.8954 2 19 2L-nan -nanL-nan -nanL19 2C20.1046 2 21 2.89543 21 4V6M17 6H21" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg></div>
+          <h4><a href="">Paiment on delivery</a></h4>
+          <h5>Secure Paiment.</h5>
+        </div>
+      </div>
+      <div class="col-lg-3 " data-aos="zoom-in" data-aos-delay="200">
         <div class="icon-box">
           <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="25" viewBox="0 0 512 512">
               <path d="M228.3 469.1L47.6 300.4c-4.2-3.9-8.2-8.1-11.9-12.4h87c22.6 0 43-13.6 51.7-34.5l10.5-25.2 49.3 109.5c3.8 8.5 12.1 14 21.4 14.1s17.8-5 22-13.3L320 253.7l1.7 3.4c9.5 19 28.9 31 50.1 31H476.3c-3.7 4.3-7.7 8.5-11.9 12.4L283.7 469.1c-7.5 7-17.4 10.9-27.7 10.9s-20.2-3.9-27.7-10.9zM503.7 240h-132c-3 0-5.8-1.7-7.2-4.4l-23.2-46.3c-4.1-8.1-12.4-13.3-21.5-13.3s-17.4 5.1-21.5 13.3l-41.4 82.8L205.9 158.2c-3.9-8.7-12.7-14.3-22.2-14.1s-18.1 5.9-21.8 14.8l-31.8 76.3c-1.2 3-4.2 4.9-7.4 4.9H16c-2.6 0-5 .4-7.3 1.1C3 225.2 0 208.2 0 190.9v-5.8c0-69.9 50.5-129.5 119.4-141C165 36.5 211.4 51.4 244 84l12 12 12-12c32.6-32.6 79-47.5 124.6-39.9C461.5 55.6 512 115.2 512 185.1v5.8c0 16.9-2.8 33.5-8.3 49.1z" />
@@ -509,7 +521,7 @@ $products5 = mysqli_query($connection, $query);
         </div>
       </div>
 
-      <div class="col-lg-4  " data-aos="zoom-in" data-aos-delay="300">
+      <div class="col-lg-3  " data-aos="zoom-in" data-aos-delay="300">
         <div class="icon-box">
           <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="25" viewBox="0 0 512 512">
               <path d="M280 0C408.1 0 512 103.9 512 232c0 13.3-10.7 24-24 24s-24-10.7-24-24c0-101.6-82.4-184-184-184c-13.3 0-24-10.7-24-24s10.7-24 24-24zm8 192a32 32 0 1 1 0 64 32 32 0 1 1 0-64zm-32-72c0-13.3 10.7-24 24-24c75.1 0 136 60.9 136 136c0 13.3-10.7 24-24 24s-24-10.7-24-24c0-48.6-39.4-88-88-88c-13.3 0-24-10.7-24-24zM117.5 1.4c19.4-5.3 39.7 4.6 47.4 23.2l40 96c6.8 16.3 2.1 35.2-11.6 46.3L144 207.3c33.3 70.4 90.3 127.4 160.7 160.7L345 318.7c11.2-13.7 30-18.4 46.3-11.6l96 40c18.6 7.7 28.5 28 23.2 47.4l-24 88C481.8 499.9 466 512 448 512C200.6 512 0 311.4 0 64C0 46 12.1 30.2 29.5 25.4l88-24z" />
@@ -586,7 +598,7 @@ $products5 = mysqli_query($connection, $query);
     }
     $(document).on('click', '.link-next', function(event) {
       event.preventDefault();
-      page = (page + 1) % 4;
+      page = (page + 1) % (<?= $totalPages ?>+1) ;
       if (page == 0) {
         page = 1;
       }
@@ -596,7 +608,7 @@ $products5 = mysqli_query($connection, $query);
       event.preventDefault();
       page = page - 1;
       if (page == 0) {
-        page = 3;
+        page = <?= $totalPages ?> ;
       }
       load_data(page); // load data for clicked page
     });

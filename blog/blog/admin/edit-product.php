@@ -41,7 +41,12 @@ if (isset($_GET['id'])) {
             <label>Update Category</label>
             <select name="category" value="<?= $product['category_id'] ?>">
                 <?php while ($category = mysqli_fetch_assoc($categories)) : ?>
-                    <option value="<?= $category['id'] ?>"><?= $category['title'] ?></option>
+                    <?php if ($category['id'] == $product['category_id'] ):?>
+                        <option value="<?= $category['id'] ?>" selected><?= $category['title'] ?></option>
+                    <?php else :?>
+                        <option value="<?= $category['id'] ?>"><?= $category['title'] ?></option>
+                    <?php endif ?>
+                    
                 <?php endwhile ?>
             </select>
             <div class="form__control">

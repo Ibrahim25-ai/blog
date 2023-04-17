@@ -7,6 +7,7 @@ $query = "SELECT * FROM products ORDER BY promo DESC Limit 0,4";
 $products2 = mysqli_query($connection, $query);
 $query = "SELECT * FROM categories";
 $categories = mysqli_query($connection, $query);
+$categories1 = mysqli_query($connection, $query);
 
 // fetch current user from database
 if (isset($_SESSION['user-id'])) {
@@ -32,13 +33,13 @@ if (isset($_SESSION['user-id'])) {
     <!-- CUSTOM STYLESHEET -->
     <link rel="stylesheet" href="<?= ROOT_URL ?>css/style.css">
     <link rel="stylesheet" href="<?= ROOT_URL ?>css/style1.css">
+   
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- ICONSCOUT CDN -->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     <!-- GOOGLE FONT (MONTSERRAT) -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
 </head>
 
 
@@ -61,7 +62,7 @@ if (isset($_SESSION['user-id'])) {
                 <ul class="megamenu-nav d-flex justify-content-center" role="menu">
                     <li class="nav-item d-none d-lg-block is-parent">
                         <a class="nav-link" href="<?= ROOT_URL ?>blog.php" id="megamenu-dropdown-1" aria-haspopup="true" aria-expanded="false">
-                            NOS PACKS<i class="fa fa-angle-down"></i>
+                            OUR PACKS<i class="fa fa-angle-down"></i>
                         </a>
                         <div class="megamenu-content" aria-labelledby="megamenu-dropdown-1">
                             <div class="container">
@@ -69,14 +70,14 @@ if (isset($_SESSION['user-id'])) {
                                     <div class="col-8 pr-5">
                                         <div class="row">
                                             <div class="col-6">
-                                                <h3 class="cc">NOS PACKS</h3>
+                                                <h3 class="cc">OUR PACKS</h3>
                                                 <hr>
                                                 <ul class="subnav">
                                                     <?php while ($pack = mysqli_fetch_assoc($packs)) : ?>
-                                                        <?php if($pack['id'] != 12) : ?>
-                                                        <li class="subnav-item">
-                                                            <a href="<?= ROOT_URL ?>/index.php?id=<?= $pack['id'] ?>" class="subnav-link">> <?= $pack['title'] ?></a>
-                                                        </li>
+                                                        <?php if ($pack['id'] != 12) : ?>
+                                                            <li class="subnav-item">
+                                                                <a href="<?= ROOT_URL ?>/index.php?id=<?= $pack['id'] ?>" class="subnav-link">> <?= $pack['title'] ?></a>
+                                                            </li>
                                                         <?php endif ?>
                                                     <?php endwhile ?>
                                                 </ul>
@@ -103,130 +104,38 @@ if (isset($_SESSION['user-id'])) {
                     </li>
                     <li class="nav-item d-none d-lg-block is-parent">
                         <a class="nav-link" href="<?= ROOT_URL ?>blog.php" id="megamenu-dropdown-2" aria-haspopup="true" aria-expanded="false">
-                            NUTRITION SPORTIVE<i class="fa fa-angle-down"></i>
+                            CATEGORIES<i class="fa fa-angle-down"></i>
                         </a>
                         <div class="megamenu-content" aria-labelledby="megamenu-dropdown-2">
                             <div class="container">
                                 <div class="row">
                                     <div class="col-8 pr-5">
                                         <div class="row">
-                                            <div class="col-4">
-                                                <h3 class="cc">Protéines</h3>
+                                            <div class="col-6">
+                                                <h3 class="cc">Our Categories</h3>
                                                 <hr>
                                                 <ul class="subnav">
-                                                    <li class="subnav-item">
-                                                        <a href="#" class="subnav-link">> Caséines</a>
-                                                    </li>
-                                                    <li class="subnav-item">
-                                                        <a href="#" class="subnav-link">> Protéines À Libération Progressive</a>
-                                                    </li>
-                                                    <li class="subnav-item">
-                                                        <a href="#" class="subnav-link">> Protéines D'Oeuf </a>
-                                                    </li>
-                                                    <li class="subnav-item">
-                                                        <a href="#" class="subnav-link">> Protéines De Viande</a>
-                                                    </li>
-                                                    <li class="subnav-item">
-                                                        <a href="#" class="subnav-link">> Protéines Végétales</a>
-                                                    </li>
-                                                    <li class="subnav-item">
-                                                        <a href="#" class="subnav-link">> Protéines Végétales</a>
-                                                    </li>
-                                                    <li class="subnav-item">
-                                                        <a href="#" class="subnav-link">> Protéines Végétales</a>
-                                                    </li>
-                                                    <li class="subnav-item">
-                                                        <a href="#" class="subnav-link">> Protéines Végétales</a>
-                                                    </li>
 
-                                                </ul>
-                                            </div>
-                                            <div class="col-4">
-                                                <h3 class="cc">Carbohydrates</h3>
-                                                <hr>
-                                                <ul class="subnav">
-                                                    <li class="subnav-item">
-                                                        <a href="#" class="subnav-link">> Index Glycémique Élevé</a>
-                                                    </li>
-                                                    <li class="subnav-item">
-                                                        <a href="#" class="subnav-link">> Mélange Séquentiel D'Hydrates De Carbone</a>
-                                                    </li>
-                                                </ul>
-                                                <div class="col">
-                                                    <h3 class="cc">Acides Aminés</h3>
-                                                    <hr>
-                                                    <ul class="subnav">
-                                                        <li class="subnav-item">
-                                                            <a href="#" class="subnav-link">> L-arginine</a>
-                                                        </li>
-                                                        <li class="subnav-item">
-                                                            <a href="#" class="subnav-link">> EAA - Mélange D'acides Aminés</a>
-                                                        </li>
-                                                        <li class="subnav-item">
-                                                            <a href="#" class="subnav-link">> BCAA's (Acides Aminés Ramifiés)</a>
-                                                        </li>
-                                                        <li class="subnav-item">
-                                                            <a href="#" class="subnav-link">> BCAA's + Glutamine</a>
-                                                        </li>
-                                                        <li class="subnav-item">
-                                                            <a href="#" class="subnav-link">> De Viande</a>
-                                                        </li>
-                                                    </ul>
-
-
-                                                </div>
-
-                                            </div>
-                                            <div class="col-4">
-                                                <h3 class="cc">Acides Gras</h3>
-                                                <hr>
-                                                <ul class="subnav">
-                                                    <li class="subnav-item">
-                                                        <a href="#" class="subnav-link">> Gainer 50/50</a>
-                                                    </li>
-                                                    <li class="subnav-item">
-                                                        <a href="#" class="subnav-link">> Gainer 10% à 30%</a>
-                                                    </li>
-                                                </ul>
-                                                <div class="col">
-                                                    <h3 class="cc">Anabolisants Naturels</h3>
-                                                    <hr>
-                                                    <ul class="subnav">
-                                                        <li class="subnav-item">
-                                                            <a href="#" class="subnav-link">> Multi-Action</a>
-                                                        </li>
-                                                        <li class="subnav-item">
-                                                            <a href="#" class="subnav-link">> Pro-Hormone De Croissance (GH)</a>
-                                                        </li>
-                                                        <li class="subnav-item">
-                                                            <a href="#" class="subnav-link">> Pro-Testostérone</a>
-                                                        </li>
-                                                        <li class="subnav-item">
-                                                            <a href="#" class="subnav-link">> ZMA</a>
-                                                        </li>
-
-                                                    </ul>
-                                                    <div class="col">
-                                                        <h3 class="cc">Barres</h3>
-                                                        <hr>
-                                                        <ul class="subnav">
-
+                                                    <?php while ($categ = mysqli_fetch_assoc($categories)) : ?>
+                                                        <?php if ($categ['id'] != 5) : ?>
                                                             <li class="subnav-item">
-                                                                <a href="#" class="subnav-link">> Barres De Protéines</a>
+                                                                <a class="subnav-link" href="<?= ROOT_URL ?>/index1.php?cat=<?= $categ['id'] ?>"><?= $categ['title'] ?></a>
                                                             </li>
-                                                            <li class="subnav-item">
-                                                                <a href="#" class="subnav-link">> Barres Énergétiques</a>
-                                                            </li>
+                                                        <?php endif ?>
 
-                                                        </ul>
+                                                    <?php endwhile ?>
 
-
-                                                    </div>
-
-
-                                                </div>
-
+                                                </ul>
                                             </div>
+                                            <div class="col-6 mt-3">
+                                                <img src="./images/45.jpg" class="img-fluid mb-3" style="max-height: 10rem;" alt="test image">
+                                                <img src="./images/45.jpg" class="img-fluid mb-3" style="max-height: 10rem;" alt="test image">
+                                                <p>
+                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, expedita sint quis rem amet, a nihil, non sunt ea quasi.
+                                                </p>
+                                                <a href="#">See more <i class="fa fa-angle-double-right"></i></a>
+                                            </div>
+                                            
                                             <!--<div class="col-3 mt-3">
                                                 <img src="./images/1.jpg" class="img-fluid mb-3" alt="test image">
                                                 <img src="./images/1ze.jpg" class="img-fluid mb-3"  alt="test image">
@@ -329,23 +238,25 @@ if (isset($_SESSION['user-id'])) {
                         </a>
                     </li>
 
-                   
+
 
 
                 </ul>
                 <li class="nav-item d-lg-none">
-                                <a class="nav-link" href="blog.php">Home</a>
-                            </li>
-                <?php if (mysqli_num_rows($products2) > 0) : ?>
-                        <?php while ($categ = mysqli_fetch_assoc($categories)) : ?>
-                            
+                    <a class="nav-link text-black" href="blog.php">Home</a>
+                </li>
+                <?php if (mysqli_num_rows($categories) > 0) : ?>
+                    <?php while ($catega = mysqli_fetch_assoc($categories1)) : ?>
+                        <?php if ($catega['id'] != 5) : ?>
                             <li class="nav-item  d-lg-none">
-                                <a class="nav-link " href="<?= ROOT_URL ?>/index1.php?cat=<?= $categ['id'] ?>"><?= $categ['title'] ?></a>
+                                <a class="nav-link text-black" href="<?= ROOT_URL ?>/index1.php?cat=<?= $catega['id'] ?>"><?= $catega['title'] ?></a>
                             </li>
-                        <?php endwhile ?>
-                    <?php else : ?>
-                        <div class="alert__message error"><?= "No categories found" ?></div>
-                    <?php endif ?>
+                        <?php endif ?>
+
+                    <?php endwhile ?>
+                <?php else : ?>
+                    <div class="alert__message error"><?= "No categories found" ?></div>
+                <?php endif ?>
                 <div class="megamenu-background" id="megamenu-background"></div>
         </div>
 

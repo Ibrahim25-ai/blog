@@ -1,4 +1,11 @@
+<?php
 
+
+$query = "SELECT * FROM categories";
+$categories = mysqli_query($connection, $query);
+
+
+?>
 <footer>
     <!-- Grid container -->
     <div class="container p-4 pb-0 bg-light text-center text-white mb-5">
@@ -11,24 +18,6 @@
         href="https://www.facebook.com/profile.php?id=100078256651030"
         role="button"
         ><i class="fab fa-facebook-f"></i
-      ></a>
-
-      <!-- Twitter -->
-      <a
-        class="btn text-white btn-floating m-1"
-        style="background-color: #55acee;"
-        href="#!"
-        role="button"
-        ><i class="fab fa-twitter"></i
-      ></a>
-
-      <!-- Google -->
-      <a
-        class="btn text-white btn-floating m-1"
-        style="background-color: #dd4b39;"
-        href="#!"
-        role="button"
-        ><i class="fab fa-google"></i
       ></a>
 
       <!-- Instagram -->
@@ -48,13 +37,13 @@
         role="button"
         ><i class="fab fa-linkedin-in"></i
       ></a>
-      <!-- Github -->
+      <!-- Whatsapp -->
       <a
         class="btn text-white btn-floating m-1"
-        style="background-color: #333333;"
+        style="background-color:#25D366;"
         href="#!"
         role="button"
-        ><i class="fab fa-github"></i
+        ><i class="fab fa-whatsapp"></i
       ></a>
     </section>
     <!-- Section: Social media -->
@@ -65,12 +54,14 @@
         <article>
             <h4>Categories</h4>
             <ul>
-                <li><a href="">Art</a></li>
-                <li><a href="">Wild Life</a></li>
-                <li><a href="">Travel</a></li>
-                <li><a href="">Music</a></li>
-                <li><a href="">Science & Technology</a></li>
-                <li><a href="">Food</a></li>
+               
+                <?php while ($categ = mysqli_fetch_assoc($categories)) : ?>
+                        <?php if ($categ['id'] != 5) : ?>
+                          <li><a href="<?= ROOT_URL ?>/index1.php?cat=<?= $categ['id'] ?>"><?= $categ['title'] ?></a></li>
+                           
+                        <?php endif ?>
+
+                    <?php endwhile ?>
             </ul>
         </article>
         <article>
@@ -83,16 +74,7 @@
                 <li><a href="">Location</a></li>
             </ul>
         </article>
-        <article>
-            <h4>Blog</h4>
-            <ul>
-                <li><a href="">Safety</a></li>
-                <li><a href="">Repair</a></li>
-                <li><a href="">Recent</a></li>
-                <li><a href="">Popular</a></li>
-                <li><a href="">Categories</a></li>
-            </ul>
-        </article>
+       
         <article>
             <h4>Permalinks</h4>
             <ul>
@@ -108,13 +90,15 @@
         <small>Copyright &copy; 2023 </small>
     </div>
 </footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+<script src='<?= ROOT_URL ?>js/jquery.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery.hoverintent/1.9.0/jquery.hoverIntent.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.min.js'></script>
 <script src="<?= ROOT_URL ?>js/index.js"></script>
 <script src="<?= ROOT_URL ?>js/main.js"></script>
+
 </body>
 
 </html>

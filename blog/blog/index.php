@@ -5,8 +5,7 @@ include 'partials/header.php';
 if (isset($_GET['id'])) {
   $id = filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT);
   $query = "SELECT * FROM products WHERE pack_id=$id";
-  $result = mysqli_query($connection, $query);
-  $product = mysqli_fetch_assoc($result);
+  $products = mysqli_query($connection, $query);
   $query = "SELECT * FROM packs WHERE id=$id";
   $product1=mysqli_query($connection, $query);
 
@@ -37,7 +36,7 @@ if (isset($_GET['id'])) {
       <?php if (mysqli_num_rows($result) > 0) : ?>
 
 
-        <?php while ($product = mysqli_fetch_array($result)) : ?>
+        <?php while ($product = mysqli_fetch_array($products)) : ?>
           <!-- get category title of each post from categories table -->
 
           <div class="col-lg-3 col-md-4  p-4">

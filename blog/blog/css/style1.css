@@ -302,12 +302,12 @@ section .section-title {
       margin-right: 5rem;
     }
   }
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 1025px) {
     .nav__items,
     aside {
       position: fixed;
       top: 0;
-      
+      left: -68%;
       width: 50%;
       height: 100%;
   
@@ -321,7 +321,7 @@ section .section-title {
     }
   
     .nav__item {
-     
+
       display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -329,6 +329,11 @@ section .section-title {
       padding: 1rem 0;
       border-bottom: 1px solid #ccc;
       
+    }
+    .nav__text{
+      
+      text-align: center;
+      align-items: center;
     }
   }
   

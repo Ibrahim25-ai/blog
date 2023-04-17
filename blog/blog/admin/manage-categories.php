@@ -2,7 +2,7 @@
 include 'partials/header.php';
 
 // fetch categories from database
-$query = "SELECT * FROM categories ORDER BY title";
+$query = "SELECT * FROM categories ";
 $categories = mysqli_query($connection, $query);
 ?>
 
