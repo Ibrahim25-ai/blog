@@ -12,7 +12,6 @@ if (isset($_GET['id']) && isset($_GET['cat_id'])) {
   $query = "SELECT * FROM products WHERE category_id=$id_cat";
   $products3 = mysqli_query($connection, $query);
 } else {
-  header('location: ' . ROOT_URL . 'admin/');
   die();
 }
 
